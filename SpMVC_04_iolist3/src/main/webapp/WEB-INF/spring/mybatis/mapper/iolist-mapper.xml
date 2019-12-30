@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.biz.iolist.persistence.IolistDao">
+	<select id="selectAll" resultType="IolistDTO">
+		select * from tbl_iolist order
+		by io_seq desc
+	</select>
+	<select id="viewSelectAll" resultType="IolistVO">
+		select
+		IO_SEQ as io_seq,
+		IO_DATE as io_date,
+		IO_INOUT as io_inout,
+
+		IO_DCODE as io_dcode,
+		d_name as
+		io_dname,
+		d_ceo as io_dceo,
+
+		IO_PCODE as io_pcode,
+		p_name as io_pname,
+		p_iprice as io_iprice,
+		p_oprice as io_oprice,
+		p_vat as io_vat,
+		IO_QTY as
+		io_qty,
+		IO_PRICE as io_price,
+		IO_TOTAL as io_total
+
+		from tbl_iolist io
+		left join tbl_dept d
+		on io.io_dcode=d.d_code
+		left join tbl_product p
+		on
+		io.io_pcode=p.p_code
+		order by io_seq desc
+	</select>
+	<select id="viewFindAll" resultType="IolistVO">
+		select
+		IO_SEQ as io_seq,
+		IO_DATE as io_date,
+		IO_INOUT as io_inout,
+
+		IO_DCODE as io_dcode,
+		d_name as
+		io_dname,
+		d_ceo as io_dceo,
+
+		IO_PCODE as io_pcode,
+		p_name as io_pname,
+		p_iprice as io_iprice,
+		p_oprice as io_oprice,
+		p_vat as io_vat,
+		IO_QTY as
+		io_qty,
+		IO_PRICE as io_price,
+		IO_TOTAL as io_total
+
+		from tbl_iolist io
+		left join tbl_dept d
+		on io.io_dcode=d.d_code
+		left join tbl_product p
+		on
+		io.io_pcode=p.p_code
+		order by io_seq desc
+	</select>
+	<insert id="insert" parameterType="IolistDTO">
+		insert into tbl_iolist(
+		IO_SEQ,
+		IO_DATE,
+		IO_INOUT,
+		IO_QTY,
+		IO_PRICE,
+		IO_TOTAL,
+		IO_PCODE,
+		IO_DCODE )
+		values(
+		seq_iolist.nextval,
+		#{io_date,jdbcType=VARCHAR},
+		#{io_inout,jdbcType=VARCHAR},
+		#{io_qty,jdbcType=VARCHAR},
+		#{io_price,jdbcType=VARCHAR},
+		#{io_total,jdbcType=VARCHAR},
+		#{io_pcode,jdbcType=VARCHAR},
+		#{io_dcode,jdbcType=VARCHAR}
+		)
+	</insert>
+	<update id="update" parameterType="IolistDTO">
+		update tbl_iolist set
+		IO_DATE=#{IO_DATE,jdbcType=VARCHAR},
+		IO_INOUT=#{IO_INOUT,jdbcType=VARCHAR},
+		IO_QTY=#{IO_QTY,jdbcType=VARCHAR},
+		IO_PRICE=#{IO_PRICE,jdbcType=VARCHAR},
+		IO_TOTAL=#{IO_TOTAL,jdbcType=VARCHAR},
+		IO_PCODE=#{IO_PCODE,jdbcType=VARCHAR},
+		IO_DCODE=#{IO_DCODE,jdbcType=VARCHAR}
+		where
+		IO_SEQ=#{IO_SEQ}
+	</update>
+	<delete id="delete">
+		delete from tbl_iolist
+		where IO_SEQ=#{IO_SEQ}
+	</delete>
+
+</mapper> 

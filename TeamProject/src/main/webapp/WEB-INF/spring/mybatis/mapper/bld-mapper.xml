@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.biz.pet.persistence.bloodtest.BloodTestDao">
+	<select id="findAll" resultType="BloodTestDTO">
+		select * from tbl_bloodtest
+	</select>
+
+	<select id="findByName" resultType="BloodTestDTO">
+		select * from tbl_bloodtest
+		where upper(BLD_NAME) like '%' || upper(#{bld_name,jdbcType=VARCHAR}) || '%'
+	</select>
+
+	<select id="findBySeq" resultType="BloodTestDTO">
+		select * from tbl_bloodtest
+		where BLD_SEQ = #{bld_seq,jdbcType=VARCHAR}
+	</select>
+
+	<insert id="insert" parameterType="BloodTestDTO">
+		insert into tbl_bloodtest(
+		BLD_SEQ,
+		BLD_NAME,
+		BLD_NAME_KOR,
+		BLD_NORMALMIN,
+		BLD_NORMALMAX,
+		BLD_OVERNORMAL,
+		BLD_BELOWNORMAL
+		) values (
+		seq_bloodtest.nextval,
+		#{bld_name,jdbcType=VARCHAR},
+		#{bld_name_kor,jdbcType=VARCHAR},
+		#{bld_normalmin,jdbcType=VARCHAR},
+		#{bld_normalmax,jdbcType=VARCHAR},
+		#{bld_overnormal,jdbcType=VARCHAR},
+		#{bld_belownormal,jdbcType=VARCHAR}
+		)
+	</insert>
+
+	<update id="update" parameterType="BloodTestDTO">
+		update tbl_bloodtest set
+		BLD_NAME = #{bld_name,jdbcType=VARCHAR},
+		BLD_NAME_KOR = #{bld_name_kor,jdbcType=VARCHAR},
+		BLD_NORMALMIN =
+		#{bld_normalmin,jdbcType=VARCHAR},
+		BLD_NORMALMAX =
+		#{bld_normalmax,jdbcType=VARCHAR},
+		BLD_OVERNORMAL =
+		#{bld_overnormal,jdbcType=VARCHAR},
+		BLD_BELOWNORMAL =
+		#{bld_belownormal,jdbcType=VARCHAR}
+		where BLD_SEQ =
+		#{bld_seq,jdbcType=VARCHAR}
+	</update>
+
+	<delete id="delete" parameterType="BloodTestDTO">
+		delete from tbl_bloodtest
+		where BLD_SEQ= #{bld_seq,jdbcType=VARCHAR}
+	</delete>
+</mapper> 

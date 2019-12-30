@@ -1,0 +1,46 @@
+@charset "UTF-8";
+
+/***** nav ******/
+#lee-nav>ul>li:first-child>a {
+	background-color: #14974b;
+	color: white;
+	font-weight: bold;
+}
+
+/***** info ******/
+#lee-info {
+	text-align: center;
+	font-size: 0.8rem;
+	margin-bottom: 80px;
+}
+
+#lee-info>h5 {
+	font-size: 1.1rem;
+	margin: 100px 0;
+}
+
+#lee-info>strong {
+	display: block;
+	color: #212e3b;
+	font-size: 2rem;
+	margin: 60px 0;
+}
+
+#lee-info>p>img {
+	display: block;
+	width: 70%;
+	height: 70%;
+	margin: 30px auto;
+}
+
+#lee-info>span {
+	display: block;
+	color: #212e3b;
+	font-weight: bold;
+	font-size: 1.4rem;
+	padding: 10px 0;
+}
+
+#lee-info>p {
+	padding: 10px 0;
+}

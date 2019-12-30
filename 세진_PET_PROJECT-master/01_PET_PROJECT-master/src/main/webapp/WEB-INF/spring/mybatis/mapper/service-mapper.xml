@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.biz.pet.persistence.community.ServiceDao">
+ 
+  	<select id="proTotalCount" resultType="Long">
+		SELECT COUNT(*) FROM tbl_service
+		<where>
+			<foreach collection="se_subject" item="se_subject" separator="OR">
+				se_subject LIKE '%' || #{se_subject, jdbcType=VARCHAR} || '%'
+			</foreach>
+		</where>
+	</select>
+
+	<select id="findBySSubjectListAndPagiNation" resultType="ServiceDTO">
+		SELECT * FROM
+		(
+		    SELECT /*+ FIRST_ROWS_100 */ ROWNUM AS NUM, IP.* FROM
+		    (
+		        SELECT /*+ INDEX_DESC(P) */ * FROM tbl_service P 
+		        <where>
+					<foreach collection="se_subject" item="se_subject" separator="OR">
+						se_subject LIKE '%' || #{se_subject, jdbcType=VARCHAR} || '%'
+					</foreach>
+		        </where>
+		    ) IP
+		    WHERE ROWNUM &lt;= #{pageDTO.limit} 
+		) TBL
+		WHERE NUM &gt;= #{pageDTO.offset}
+	</select>
+
+	<select id="selectPagination" resultType="ServiceDTO">
+		SELECT * FROM
+		(
+		    SELECT /*+ FIRST_ROWS */ ROWNUM AS NUM, IP.* FROM
+		    (
+		        SELECT /*+ INDEX_DESC(P) */ * FROM tbl_service P 
+		    ) IP
+		    WHERE ROWNUM &lt;= #{limit} 
+		) TBL
+		WHERE NUM &gt;= #{offset}
+	</select>
+ 
+
+ 	<select id="selectAll" resultType="ServiceDTO">
+ 		SELECT * FROM tbl_service
+ 	</select>
+ 	
+ 	<select id="findById" resultType="ServiceDTO">
+ 		SELECT * FROM tbl_service WHERE SE_SEQ = #{se_seq}
+ 	</select>
+ 	
+ 	<insert id="insert" parameterType="ServiceDTO">
+		INSERT INTO tbl_service (
+			SE_SEQ,
+			SE_AUTH,
+			SE_DATE,
+			SE_SUBJECT,
+			SE_TEXT
+		) VALUES (
+			SEQ_S.NEXTVAL,
+			#{se_auth, jdbcType=VARCHAR},
+			#{se_date, jdbcType=VARCHAR},
+			#{se_subject, jdbcType=VARCHAR},
+			#{se_text, jdbcType=VARCHAR}
+		)
+ 	</insert>
+ 	
+ 	<update id="update"  parameterType="ServiceDTO">
+ 		UPDATE tbl_service SET
+			SE_AUTH = #{se_auth, jdbcType=VARCHAR},
+			SE_DATE = #{se_date, jdbcType=VARCHAR},
+			SE_SUBJECT = #{se_subject, jdbcType=VARCHAR},
+			SE_TEXT = #{se_text, jdbcType=VARCHAR}
+		WHERE SE_SEQ = #{se_seq, jdbcType=VARCHAR}
+ 	</update>
+ 	
+ 	<delete id="delete">
+ 		DELETE FROM tbl_service WHERE SE_SEQ = #{se_seq}
+ 	</delete>
+
+</mapper>

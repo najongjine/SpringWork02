@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.biz.pet.persistence.simplediag.lung.LungExplDao">
+	<select id="findAll" resultType="LungExplDTO">
+		select * from tbl_lungexpl order
+		by lung_name
+	</select>
+	<select id="findByLECODE" resultType="LungExplDTO">
+		select * from
+		tbl_lungexpl
+		where LUNG_E_CODE=#{lung_e_code,jdbcType=VARCHAR}
+	</select>
+	<update id="update" parameterType="LungExplDTO">
+		update tbl_lungexpl set
+		LUNG_E_EXPL =#{lung_e_expl,jdbcType=VARCHAR},
+		LUNG_E_NAME =#{lung_e_name,jdbcType=VARCHAR}
+		where
+		LUNG_E_SEQ=#{lung_e_seq,jdbcType=VARCHAR}
+	</update>
+	<delete id="delete" parameterType="LungExplDTO">
+		delete from tbl_lungexpl
+		where
+		LUNG_E_SEQ=#{lung_e_seq,jdbcType=VARCHAR}
+	</delete>
+	<delete id="deleteByLECode" parameterType="String">
+	delete from tbl_lungexpl
+	where lung_e_code=#{lung_e_code}
+	</delete>
+	<insert id="insert" parameterType="LungExplDTO">
+		insert into tbl_lungexpl (
+		LUNG_E_SEQ,
+		LUNG_E_CODE,
+		LUNG_E_EXPL,
+		LUNG_E_NAME
+		) values (
+		seq_lungexpl.nextval,
+		#{lung_e_code,jdbcType=VARCHAR},
+		#{lung_e_expl,jdbcType=VARCHAR},
+		#{lung_e_name,jdbcType=VARCHAR}
+		)
+	</insert>
+
+</mapper> 

@@ -1,0 +1,122 @@
+@charset "UTF-8";
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html {
+	height: 100%
+}
+
+body {
+	overflow-y: auto;
+	width: 1200px;
+	/* body height를 100으로 설정하려면 html도 height를 같이 맞춰줘야함(html은 height가 기본적으로 없음) */
+	height: 100%;
+	margin: 0 auto;
+}
+
+#head {
+	position: relative;
+	height: 420px;
+}
+
+header {
+	margin: 0;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 10;
+}
+
+.logo-img {
+	position: relative;
+	top: 15px;
+}
+
+nav {
+	margin: 0;
+	padding: 0;
+	background-color: white;
+	color: black;
+}
+
+nav ul.main-nav {
+	display: flex;
+	font-size: 20px;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	justify-content: flex-end;
+	position: absolute;
+	top: 85px;
+	right: 0;
+}
+
+nav ul li a {
+	margin: 0.3rem;
+	display: block;
+	color: inherit;
+	padding: 14px 16px;
+	text-decoration: none;
+	transition: 0.5s;
+}
+
+nav ul li a:hover {
+	padding: 14px 16px 9px 16px;
+	border-bottom: 0.2em solid pink;
+	font-weight: bold;
+}
+
+.bannerimg {
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	top: 155px;
+	left: 0;
+}
+
+#userimg a, #userimg a img {
+	display: block;
+	position: absolute;
+	right: 0;
+	top: 5px;
+}
+
+#main-body{
+	display: flex;
+	border: 1px solid red;
+}
+
+section#main-section-body {
+	flex-grow: 1;
+	flex-shrink: 0;
+	flex-basis: auto;
+	display: flex;
+}
+section#main-section-body article{
+	margin-left: 50px;
+}
+section#main-section-body aside{
+   margin-left: 0;
+   width: 20%;
+}	
+
+#botton{
+	margin: 0 auto;
+}
+
+.hos-list #btn-insert{
+	top: 100%;
+	right: 0;
+}
+
+div#h-list{
+	width: 880px;
+	/*
+	height: 600px;
+	overflow-y: auto;
+	*/
+	overflow-x: scroll;
+}

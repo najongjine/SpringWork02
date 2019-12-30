@@ -1,0 +1,137 @@
+@charset "UTF-8";
+
+.news_section{
+    height: 70%;
+}
+.news_search{
+    display:block;
+    justify-content: space-between;
+    
+    
+    text-align: center;
+    font-size: 30px;
+    margin: 0 auto;
+    margin-left:auto;
+    width: 70%;
+    background-color: #2f4f4f;
+}
+.news_button{
+    width:60px;
+    height: 40px;
+    font-weight: bold;
+    margin: 8px auto;
+}
+.news_search > select{
+}
+.news_search > button{
+}
+.news_search button:hover{
+    border:1px solid rgb(12, 93, 139);
+}
+.news_search input{
+    width:50%;
+    height: 35px;
+    margin: 8px auto;
+}
+.body_title > p{
+    padding-bottom: 8px;
+    margin: 8px auto;
+    width:70%;
+    border-bottom: 3px solid rgb(202, 200, 200);
+    font-size: 30px;
+    margin:10px auto;
+}
+.body_content{
+	width:70%;
+	height:500px;
+	margin:0 auto;
+}
+.body_content > h2{
+	padding-top: 16px;
+}
+.body_content p{
+	font-size: 16px;
+	padding:8px;
+}
+.news_page_button{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    
+}
+.news_page_button button{
+    width: 50px;
+    height: 50px;
+    margin : 5px;
+}
+
+.news_page_button button:hover{
+    border:1px solid rgb(12, 93, 139);
+    cursor: pointer;
+    font-weight: bold;
+}
+.news_section{
+}
+.news_info_use{
+    width:70%;
+    height: 70%;
+    margin: 0px auto;
+}
+.news_info_use ul{
+    padding:16px;
+    background-color: rgb(182, 182, 182);
+}
+.news_info_use li{
+    padding: 8px 0 ;
+    color:navy;
+    font-weight:bold;
+    list-style: none;    
+}
+
+/* 소식 세부내용 */
+.news_detail{
+    margin:0 auto;
+    height: 70%;
+}
+.news_detail div{
+    width:70%;
+    height: 400px;
+    margin:0 auto;
+}
+.news_detail_file th{
+    width:19%;
+}
+
+/* 개선사항 페이지 */
+.opinion_table div{
+    width:85%;
+    
+    text-align: right;
+}
+.opinion_table tr th{
+    width:15%;
+}
+.opinion_table button{
+    width:100px;
+    height:50px;
+    margin:5px;
+}
+.opinion_table th{
+    padding:0;
+    background-color: rgb(47,79,79);
+    color:white;
+}
+.opinion_table input{
+    width:99%;
+    height:55px;
+    margin:0px;
+    
+}
+.opinion_table .op_input{
+	height:400px;
+	width:99%;
+}
+.opinion_table input:hover{
+    border:1px solid rgb(12, 93, 139);
+    
+}

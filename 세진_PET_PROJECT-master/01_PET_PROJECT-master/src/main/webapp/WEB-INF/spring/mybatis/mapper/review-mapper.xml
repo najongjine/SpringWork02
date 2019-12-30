@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.biz.pet.persistence.community.ReviewDao">
+ 
+ 	<select id="proTotalCount" resultType="Long">
+		SELECT COUNT(*) FROM tbl_review
+		<where>
+			<foreach collection="re_subject" item="re_subject" separator="OR">
+				re_subject LIKE '%' || #{re_subject, jdbcType=VARCHAR} || '%'
+			</foreach>
+		</where>
+	</select>
+
+	<select id="findByRSubjectListAndPagiNation" resultType="ReviewDTO">
+		SELECT * FROM
+		(
+		    SELECT /*+ FIRST_ROWS_100 */ ROWNUM AS NUM, IP.* FROM
+		    (
+		        SELECT /*+ INDEX_DESC(P) */ * FROM tbl_review P 
+		        <where>
+					<foreach collection="re_subject" item="re_subject" separator="OR">
+						re_subject LIKE '%' || #{re_subject, jdbcType=VARCHAR} || '%'
+					</foreach>
+		        </where>
+		    ) IP
+		    WHERE ROWNUM &lt;= #{pageDTO.limit} 
+		) TBL
+		WHERE NUM &gt;= #{pageDTO.offset}
+	</select>
+
+	<select id="selectPagination" resultType="ReviewDTO">
+		SELECT * FROM
+		(
+		    SELECT /*+ FIRST_ROWS */ ROWNUM AS NUM, IP.* FROM
+		    (
+		        SELECT /*+ INDEX_DESC(P) */ * FROM tbl_review P 
+		    ) IP
+		    WHERE ROWNUM &lt;= #{limit} 
+		) TBL
+		WHERE NUM &gt;= #{offset}
+	</select>
+	
+ 	<select id="selectAll" resultType="ReviewDTO">
+ 		SELECT * FROM tbl_review
+ 	</select>
+ 	
+ 	<select id="findById" resultType="ReviewDTO">
+ 		SELECT * FROM tbl_review WHERE RE_SEQ = #{re_seq}
+ 	</select>
+ 	
+ 	<insert id="insert" parameterType="ReviewDTO">
+		INSERT INTO tbl_review (
+			RE_SEQ,
+			RE_AUTH,
+			RE_DATE,
+			RE_SUBJECT,
+			RE_TEXT
+		) VALUES (
+			SEQ_R.NEXTVAL,
+			#{re_auth, jdbcType=VARCHAR},
+			#{re_date, jdbcType=VARCHAR},
+			#{re_subject, jdbcType=VARCHAR},
+			#{re_text, jdbcType=VARCHAR}
+		)
+ 	</insert>
+ 	
+ 	<update id="update"  parameterType="ReviewDTO">
+ 		UPDATE tbl_review SET
+			RE_AUTH = #{re_auth, jdbcType=VARCHAR},
+			RE_DATE = #{re_date, jdbcType=VARCHAR},
+			RE_SUBJECT = #{re_subject, jdbcType=VARCHAR},
+			RE_TEXT = #{re_text, jdbcType=VARCHAR}
+		WHERE RE_SEQ = #{re_seq, jdbcType=VARCHAR}
+ 	</update>
+ 	
+ 	<delete id="delete">
+ 		DELETE FROM tbl_review WHERE RE_SEQ = #{re_seq}
+ 	</delete>
+
+</mapper>

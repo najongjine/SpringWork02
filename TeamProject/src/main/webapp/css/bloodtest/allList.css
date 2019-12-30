@@ -1,0 +1,24 @@
+@charset "UTF-8";
+*{
+	white-space: pre-line;
+}
+table {
+	margin: auto;
+  border-collapse: collapse;
+}
+button{
+	float: right;
+	margin-right: 10%;
+}
+table, th, td {
+  border: 1px solid black;
+  	padding: 5px;
+}
+th{
+	background-color: rgba(35, 35, 55, 0.13);
+}
+div#search{
+	display: flex;
+	margin-right: 10px;
+}
+

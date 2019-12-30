@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.biz.pet.persistence.UserDao">
+ 
+ 	<select id="selectAll" resultType="userDTO">
+ 		SELECT * FROM tbl_user
+ 	</select>
+ 	
+ 	<select id="findById" resultType="userDTO">
+ 		SELECT * FROM tbl_user
+ 		WHERE U_ID = #{u_id}
+ 	</select>
+ 	
+	<insert id="userInsert" parameterType="userDTO">
+		
+		INSERT INTO tbl_user(
+			U_ID,
+			U_NAME,
+			U_PASSWORD,
+			U_PNAME,
+			U_PAGE,
+			U_PWEIGHT
+		)VALUES(
+			#{u_id,jdbcType=VARCHAR},
+			#{u_name,jdbcType=VARCHAR},
+			#{u_password,jdbcType=VARCHAR},
+			#{u_pname,jdbcType=VARCHAR},
+			#{u_page,jdbcType=VARCHAR},
+			#{u_pweight,jdbcType=VARCHAR}
+			
+		)
+	
+	</insert> 
+ </mapper> 

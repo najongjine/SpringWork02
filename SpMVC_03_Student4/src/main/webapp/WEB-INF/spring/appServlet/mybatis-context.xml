@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/tx https://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+
+<!-- mybatis spring jdbc-dbcp를 사용하여 DBConnection 설정 -->
+<bean id="oracleDS" class="org.apache.commons.dbcp2.BasicDataSource">
+<!-- ojdbc 드라이버와 연동되어서 DB연경정보를 정해진 개수만큼 미리 설정해두고 필요에 따라서 connection 시켜주는 클래스 -->
+<!-- dbcp2 : java1.8 이상에서 사용 -->
+<property name="driverClassName" value="oracle.jdbc.OracleDriver"></property>
+<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"></property>
+<property name="username" value="user3"></property>
+<property name="password" value="1234"></property>
+</bean>
+
+<!-- dataSource를 주입할때 value가 아니고ㅓ ref로 주입해야 한다 -->
+<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+<property name="dataSource" ref="oracleDS"/>
+<property name="configLocation" value="/WEB-INF/spring/appServlet/mybatis/mybatis-config.xml"/>
+<property name="mapperLocations" value="/WEB-INF/spring/appServlet/mybatis/mapper/*-mapper.xml"/>
+</bean>
+
+<!-- dataSource를 주입할때 value가 아니고ㅓ ref로 주입해야 한다 -->
+<bean class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+<property name="dataSource" ref="oracleDS"/>
+</bean>
+
+<!-- sqlSeesionTemplate의 생성자에 sessioFactory 주입 -->
+<bean class="org.mybatis.spring.SqlSessionTemplate">
+<constructor-arg index="0" ref="sqlSessionFactory"/>
+</bean>
+</beans>

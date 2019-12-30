@@ -1,0 +1,75 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:set var="rootPath" value="${pageContext.request.contextPath}"/>
+
+<div class="swiper-container">
+	<div class="swiper-wrapper">
+		<div class="swiper-slide">
+			<img alt="올인원멀티밤" src="${rootPath}/images/banner1.png">
+			<div class="lee-ban-info">
+				<span>Dont Cry My Pet</span>
+				<strong>피모에 양보하세요</strong>
+				<p>올인원 만능 피부케어 멀티밤 1+1</p>
+				<p>건조한 계절! 요즘 반려동물은 결을 관리한다!</p>
+				<p>우리 아이 피모를 보호해주세요</p>
+				<a href="http://www.dontcrymypet.com/product/detail.html?product_no=38" target="_new" id="shop">EVENT MORE</a>
+			</div>
+		</div>
+		<div class="swiper-slide">
+			<img alt="치석껌" src="${rootPath}/images/banner2.png">	    	
+			<div class="lee-ban-info">
+				<span>IT CHU</span>
+				<strong>수의사가 만든 건강한 치석껌</strong>
+				<p>반려동물의 건강한 삶을 위한 덴탈껌</p>
+				<p>구강 건강에 도움 주는 식재료만 듬뿍</p>
+				<p>잇츄 하나로 치아 건강을 챙겨주세요</p>
+				<a href="https://www.fitpetmall.com/goods/goods_view.php?goodsNo=1000000008" target="_new" id="shop">EVENT MORE</a>
+			</div>
+		</div>
+	</div>
+	<div class="swiper-pagination"></div>
+	<div class="swiper-button-next"></div>
+	<div class="swiper-button-prev"></div>
+</div>
+
+<section id="lee-hs-near">
+	<h4>나와 가장 가까운 동물 병원 정보</h4>
+	
+	<form id="lee-hs-search">
+		<input type="search" placeholder="동을 입력하세요 (ex) 삼각동, 두암동 등)" id="lee-dong-search">
+		<button id="lee-btn-dong">검색</button>
+	</form>
+	
+	<div id="lee-hs-near-box">
+		<article class="lee-hs-info" id="lee-hs-info1">
+			<ul>
+				<li><a href="#"><img src="${rootPath}/images/h1.png" alt="병원내부"></a><span>1</span></li>
+				<li>광주 동물병원</li>
+				<li>광주광역시 북구 삼각동</li>
+				<li>062-222-2222</li>
+				<li>매일 AM 09:00 ~ PM 06:00</li>
+			</ul>
+		</article>
+		
+		<article class="lee-hs-info" id="lee-hs-info2">
+			<ul>
+				<li><a href="#"><img src="${rootPath}/images/h2.png" alt="병원내부"></a><span>2</span></li>
+				<li>광주 동물병원</li>
+				<li>광주광역시 북구 삼각동</li>
+				<li>062-222-2222</li>
+				<li>매일 AM 09:00 ~ PM 06:00</li>
+			</ul>
+		</article>
+		
+		<article class="lee-hs-info" id="lee-hs-info3">
+			<ul>
+				<li><a href="#"><img src="${rootPath}/images/h3.png" alt="병원내부"></a><span>3</span></li>
+				<li>광주 동물병원</li>
+				<li>광주광역시 북구 삼각동</li>
+				<li>062-222-2222</li>
+				<li>매일 AM 09:00 ~ PM 06:00</li>
+			</ul>
+		</article>
+	</div>
+</section>

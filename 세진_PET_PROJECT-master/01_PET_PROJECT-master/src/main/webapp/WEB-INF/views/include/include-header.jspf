@@ -1,0 +1,16 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:set var="rootPath" value="${pageContext.request.contextPath}" />
+
+<header id="lee-header">
+	<h3><a href="${rootPath}/"><img alt="로고이미지" src="${rootPath}/images/logo.png"></a></h3>
+
+	<form id="lee-search-form">
+		<fieldset>
+			<legend id="lee-legend">Search</legend>
+			<input type="search" placeholder="검색어를 입력하세요" id="lee-hsearch">
+			<button id="lee-btn-hsearch">검색</button>
+		</fieldset>
+	</form>
+</header>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.biz.pet.persistence.simplediag.lung.LungDao">
+	<select id="selectMaxLECode" resultType="String">
+		select max(LUNG_EXPLCODE) from tbl_lung
+	</select>
+	<select id="findAll" resultType="LungDTO">
+		select * from tbl_lung order by
+		lung_name
+	</select>
+	<select id="findBySeq" resultType="LungDTO">
+		select * from tbl_lung
+		where
+		lung_seq=#{lung_seq,jdbcType=VARCHAR}
+	</select>
+	<insert id="insert" parameterType="LungDTO">
+		insert into tbl_lung (
+		lung_seq,
+		lung_imgurl,
+		lung_name,
+		lung_explcode
+		) values(
+		seq_lung.nextval,
+		#{lung_imgurl,jdbcType=VARCHAR},
+		#{lung_name,jdbcType=VARCHAR},
+		#{lung_explcode,jdbcType=VARCHAR}
+		)
+
+	</insert>
+	<update id="update" parameterType="LungDTO">
+		update tbl_lung set
+		lung_imgurl =#{lung_imgurl,jdbcType=VARCHAR},
+		lung_name
+		=#{lung_name,jdbcType=VARCHAR},
+		lung_explcode
+		=#{lung_explcode,jdbcType=VARCHAR}
+		where
+		lung_seq=#{lung_seq,jdbcType=VARCHAR}
+	</update>
+	<delete id="delete" parameterType="Long">
+		delete from tbl_lung
+		where lung_seq=#{lung_seq,jdbcType=VARCHAR}
+
+	</delete>
+</mapper> 

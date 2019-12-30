@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.biz.pet.persistence.HospitalDao">
+ 
+ 	<select id="hTotalCount" resultType="Long">
+ 		SELECT COUNT(*) FROM tbl_hospital_gwj
+ 	</select>
+ 	
+ 	<select id="selectPagination" resultType="hDTO">
+  	
+	  	SELECT * FROM
+			(
+	    	SELECT /*+ FIRST_ROWS_100 */ROWNUM AS NUM, IP.*FROM
+	    	(
+	        	SELECT /*+ INDEX_DESC(P) */ * FROM tbl_hospital_gwj H
+	    	) IP
+	    	WHERE ROWNUM &lt;= ${limit}
+			) TBL
+		WHERE NUM &gt;= #{offset}
+  </select>
+  
+ 	
+ 	<select id="selectAll" resultType="hDTO">
+ 		SELECT * FROM tbl_hospital_gwj ORDER BY h_seq DESC
+ 	</select>
+ 	
+ 	<select id="findBysearch" resultType="hDTO">
+ 		SELECT * FROM tbl_hospital_gwj 	
+ 		WHERE H_NAME = #{h_name}
+ 	</select>
+ 	
+ 	<select id="findbyId" resultType="hDTO">
+ 		SELECT * FROM tbl_hospital_gwj
+ 		WHERE H_SEQ = #{h_seq}
+ 	</select>
+ 	
+ 	<insert id="insert" parameterType="hDTO">
+ 		<selectKey resultType="LONG" keyProperty="h_seq" order="BEFORE">
+ 			SELECT SEQ_HOSPITAL.NEXTVAL FROM DUAL
+ 		</selectKey>
+ 		INSERT INTO tbl_hospital_gwj(
+	 		H_SEQ,
+			H_NAME,
+			H_ADDR,
+			H_TEL,
+			H_ETC,
+			H_PRICE
+		)VALUES(
+			#{h_seq,jdbcType=VARCHAR},
+			#{h_name,jdbcType=VARCHAR},
+			#{h_addr,jdbcType=VARCHAR},
+			#{h_tel,jdbcType=VARCHAR},
+			#{h_etc,jdbcType=VARCHAR},
+			#{h_price,jdbcType=VARCHAR})	
+ 	</insert>
+ 	
+ 	<update id="update" parameterType="hDTO">
+ 		
+ 		UPDATE tbl_hospital_gwj SET
+ 			
+			H_NAME = #{h_name,jdbcType=VARCHAR},
+			H_ADDR = #{h_addr,jdbcType=VARCHAR},
+			H_TEL = #{h_tel,jdbcType=VARCHAR},
+			H_ETC = #{h_etc,jdbcType=VARCHAR},
+			H_PRICE = #{h_price,jdbcType=VARCHAR}
+		
+		WHERE H_SEQ = #{h_seq,jdbcType=VARCHAR}	
+ 	
+ 	</update>
+ 	
+ 	<delete id="delete" parameterType="hDTO">
+ 		DELETE tbl_hospital_gwj
+ 		WHERE H_SEQ = #{h_seq,jdbcType=VARCHAR}
+ 	</delete>
+ 	
+ 	
+ </mapper> 

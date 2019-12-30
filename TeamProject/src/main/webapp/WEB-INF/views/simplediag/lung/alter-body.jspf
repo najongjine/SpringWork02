@@ -1,0 +1,48 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<c:set var="rootPath" value="${pageContext.request.contextPath }"/>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>□□□ My JSP Page □□□</title>
+</head>
+<body>
+<section class="container">
+	<p>${lungDTO.lung_seq }</p>
+	<p><img src="${rootPath}/files/${lungDTO.lung_imgurl}" id="p_image" ></p>
+	
+	<form:form modelAttribute="lungDTO"  method="post" enctype="multipart/form-data">
+	<form:input class="form-control" type="hidden" path="lung_seq"/>
+	<form:input class="form-control" type="hidden" path="lung_explcode"/>
+	<label></label><form:input class="form-control" path="lung_imgurl" type="hidden"/>
+	<label>이미지 파일 선택:</label><input class="form-control" type="file" name="u_file" id="u_file" accept="image/*">
+	<br/>
+	<label>병 이름:</label><form:input class="form-control" path="lung_name"/>
+	<br/>
+	<input class="form-control" name="lung_e_code" value="${lungDTO.lung_explcode}" type="hidden">
+	<input class="form-control" name="lung_e_name" value="${lungDTO.lung_name}" type="hidden">
+	
+	<button class="btn float-right btn-danger">
+	<a href="${rootPath }/simplediag/lung/deleteAll?lung_seq=${lungDTO.lung_seq}">전체삭제</a>
+	</button>
+	
+	<br/>
+	<p>병Code:${lungDTO.lung_explcode }</p>
+	
+	<c:forEach items="${leList}" var="expl">
+		<p><input class="form-control" name="currentStrExpl" value="${expl.lung_e_expl }"></p>
+	</c:forEach>
+	<div class="input_fields_wrap">
+    <button class="add_field_button btn btn-outline-info">설명항목 더 추가하기</button>
+    <div><input class="form-control" type="text" name="newStrExpl"></div>
+	</div>
+	<p><button class="btn btn-primary">수정</button></p>
+	</form:form>
+</section>
+</body>
+</html>

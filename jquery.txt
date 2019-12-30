@@ -1,0 +1,18 @@
+//jquery offline 설치
+<script src="${rootPath }/js/jquery-3.4.1.js"></script>
+
+
+data-auth="${memo.auth }"><!-- 사용자 정의 변수 -->
+
+$(".content-body").click(function() {
+		//$(this) 현재 클릭된 요소|tag 의 모든 정보
+		let id=$(this).attr("data-id")
+		let auth=$(this).attr("data-auth")
+
+		//js 파일을 외부로 놔둘시 
+<script>
+	var rootPath = "${pageContext.request.contextPath }"
+</script>
+rootPath +"/memo/view?=id="+id     이렇게 해줘야함
+		document.location.href="${rootPath}/memo/view?=id="+id
+	})

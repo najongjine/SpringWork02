@@ -1,0 +1,285 @@
+@charset "UTF-8";
+/***** nav ******/
+#lee-nav>ul>li:nth-child(5)>a {
+	background-color: #14974b;
+	color: white;
+	font-weight: bold;
+}
+
+/***** community ******/
+#lee-community {
+	position: relative;
+	width: 85%;
+	margin: 90px auto;
+}
+
+/***** community-nav ******/
+#lee-community-nav {
+	margin: 0 0 30px 70px;
+}
+
+#lee-community-nav>ul {
+	display: flex;
+}
+
+#lee-community-nav>ul>li:first-child {
+	margin-right: 10px;
+}
+
+#lee-community-nav>ul>li>a {
+	display: block;
+	color: black;
+	font-size: 0.9rem;
+	text-align: center;
+	width: 100px;
+	padding: 5px 0;
+}
+
+/***** community-list ******/
+#lee-community-lists {
+	width: 86%;
+	margin: 0 auto;
+	border-collapse: collapse;
+	border-spacing: 0;
+	border-top: 1px solid #b3b3b3;
+	border-bottom: 1px solid #b3b3b3;
+	text-align: center;
+}
+
+.lee-community-list {
+	background-color: #f8f8f8;
+}
+
+.lee-community-list, .lee-community-list-td {
+	padding: 6px;
+	vertical-align: top;
+	font-size: 0.8rem;
+}
+
+#lee-community-list1 {
+	width: 10%;
+}
+
+#lee-community-list2 {
+	width: 55%;
+}
+
+#lee-community-list3 {
+	width: 15%;
+}
+
+#lee-community-list4 {
+	width: 20%;
+}
+
+#lee-community-subject {
+	text-align: initial;
+}
+
+tr.lee-content-body:nth-child(even) {
+	background-color: #f8f8f8;
+}
+
+tr.lee-content-body:nth-child(odd) {
+	background-color: #fff;
+}
+
+tr.lee-content-body:hover {
+	background-color: #ddd;
+	cursor: pointer;
+}
+
+/***** community-search ******/
+#lee-community-search-form {
+	width: 86%;
+	margin: 0 auto;
+}
+
+#lee-community-search-input {
+	width: 25%;
+	padding: 6px 10px;
+	font-size: 0.7rem;
+	margin: 5px 100px 5px 652px;
+	border: 1px solid #7bc043;
+}
+
+/***** community-btn-write ******/
+#lee-btn-write {
+	position: absolute;
+	left: 75px;
+	bottom: 40px;
+	border: none;
+	cursor: pointer;
+	font-size: 0.8rem;
+	text-align: center;
+	width: 100px;
+	padding: 5px 0;
+	background-color: #7bc043;
+	color: white;
+}
+
+/***** community-pagination ******/
+.lee-pagination {
+	display: flex;
+	width: 86%;
+	margin: 0 auto;
+	justify-content: center;
+}
+
+.lee-page-item {
+	list-style:none;
+	align-items: center;
+}
+
+.lee-page-link {
+	display: block;
+	padding: 6px 12px;
+	margin:0 2px;
+	color: #14974b;
+	border:1px solid #DEE2E6;
+}
+
+.lee-page-link:hover {
+	color:white;
+	background-color: #14974b;
+	border-color: #14974b;
+}
+
+.lee-page-item.active .lee-page-link{
+	z-index:3;
+	color:#fff;
+	background-color: #14974b;
+	border-color:  #14974b;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/***** #community-view ******/
+#lee-community-view {
+	width: 86%;
+	margin: 70px auto;
+}
+
+#lee-community-view>h5 {
+	color: #34495e;
+	font-size: 1.5rem;
+	margin: 0 0 20px 80px;
+}
+
+#lee-community-view-view {
+	width: 86%;
+	margin: 0 auto;
+	border-collapse: collapse;
+	border-spacing: 0;
+	border-top: 1px solid #b3b3b3;
+	border-bottom: 1px solid #b3b3b3;
+}
+
+#lee-view-subject {
+	white-space: pre-line;
+	padding: 20px 20px;
+	font-size: 1.2rem;
+}
+
+#lee-view-text {
+	white-space: pre-line;
+	padding: 5px 20px 20px 20px;
+	font-size: 0.8rem;
+	vertical-align: top;
+}
+
+#lee-view-hide {
+	display: none;
+}
+
+#lee-community-btn-box {
+	width: 86%;
+	margin: 20px auto;
+}
+
+.lee-community-btn {
+	display: inline-block;
+	font-size: 0.9rem;
+	text-align: center;
+	width: 100px;
+	padding: 5px 0;
+	background-color: #7bc043;
+	color: white;
+}
+
+#lee-btn-list {
+	margin-left: 10px;
+}
+
+#lee-btn-update {
+	margin-left: 560px;
+}
+
+/***** #community-insert ******/
+#lee-community-insert {
+	width: 86%;
+	margin: 70px auto;
+}
+
+#lee-community-insert>h5 {
+	color: #34495e;
+	font-size: 1.5rem;
+	margin-left: 80px;
+}
+#lee-community-insert>fieldset {
+	border: none;
+}
+.lee-memo-form {
+	margin: 0 auto;
+	width: 86%;
+	margin: 30px auto;
+}
+
+#lee-input-auth, #lee-input-date, #lee-input-subject, #lee-textarea {
+	display: inline-block;
+	width: 100%;
+	padding: 8px;
+	margin-bottom: 10px;
+}
+
+#lee-input-auth:focus, #lee-input-date:focus, #lee-input-subject:focus, #lee-textarea:focus {
+	border: 2px solid #14974b;
+	outline: none;
+}
+
+#lee-btn-insert {
+	border: none;
+	font-size: 0.9rem;
+	text-align: center;
+	width: 100px;
+	padding: 5px 0;
+	background-color: #7bc043;
+	color: white;
+	margin: 30px 0 0 764px;
+	cursor: pointer;
+}
