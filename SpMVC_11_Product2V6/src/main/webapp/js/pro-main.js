@@ -1,12 +1,9 @@
 $(function() {
-<<<<<<< HEAD
 		$("#pro-img-delete")
-=======
 	$("#search-input").on("search",function(){
 		$("#search-form").submit()
 	})	
 	$("#pro-img-delete")
->>>>>>> 9d05e48e65bbf5f0c3c46ae78ac8c95f660b9168
 				.click(
 						function() {
 							if (confirm("대표 이미지를 삭제할까요?")) {
@@ -36,10 +33,8 @@ $(function() {
 	})
 	$("tr.p-row").click(function() {
 		let p_code=$(this).attr("data-id")
-<<<<<<< HEAD
 		getProInfo(p_code)
 	})
-=======
 		
 		//현재 클릭된 tr 전체 DOM을 tr 변수에 담아라
 		let tr=$(this)
@@ -72,7 +67,6 @@ $(function() {
 	})
 	
 	//예전방식
->>>>>>> 9d05e48e65bbf5f0c3c46ae78ac8c95f660b9168
 	var getProInfo=function(p_code){
 		
 		$.ajax({
