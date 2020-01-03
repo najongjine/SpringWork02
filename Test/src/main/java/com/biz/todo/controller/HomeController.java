@@ -42,11 +42,10 @@ public class HomeController {
 		return "home";
 	}
 	
-	@ResponseBody
-	@RequestMapping(value = "/aitest",produces="application/json;charset=UTF-8")
+	@RequestMapping(value = "/aitest")
 	public String aiTest(Model model) {
-		String aiTest=aiService.aiTest();
-		return aiTest;
+		aiService.aiTest();
+		return "home";
 	}
 	
 }
