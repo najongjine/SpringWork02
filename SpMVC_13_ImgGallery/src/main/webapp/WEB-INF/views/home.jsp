@@ -35,7 +35,12 @@
 		padding: 1rem;
 		color: white;
 	}
+	section{
+		width: 90%;
+		margin: 10px auto;
+	}
 	#img_box{
+		margin:10px auto;
 		border: 1px solid green;
 		display: flex;
 		flex-wrap: wrap;
@@ -49,7 +54,16 @@
 		width: 200px;
 		height: 200px;
 		margin: 10px;
+		/*이미지가 cardbox보다 클때 이미지 자르기*/
+		overflow:hidden;
 		box-shadow: 0 4px 10px 0 rgba(0,0,0,0.16), 0 4px 20px 0 rgba(0,0,0,0.19);
+		display: flex;
+		justify-content: center;
+		flex-flow: column;
+	}
+	.img_card .img_title{
+	padding: 0.5;
+	text-align: center;
 	}
 	.bz-button{
 		border: none;
@@ -66,6 +80,10 @@
 	}
 	.bz-button:hover {
 		box-shadow: 0 8px 16px rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.2);
+	}
+	a{
+	text-decoration: none;
+	color: inherit;
 	}
 	div.input_box{
 	width:90%;
@@ -94,6 +112,9 @@
 	}
 }
 </style>
+<script type="text/javascript"> var rootPath="${rootPath}"</script>
+<script type="text/javascript" src="${rootPath }/javascript/image_upload.js"></script>
+<script type="text/javascript" src="${rootPath }/javascript/images_upload.js"></script>
 <script type="text/javascript">
 $(function() {
 	var toolbar=[
@@ -112,7 +133,8 @@ $(function() {
 		placeholder:'본문을 입력하세요',
 		width:'100%',
 		height:'200px',
-		toolbar:toolbar
+		toolbar:toolbar,
+		disableDragAndDrop:true
 	})
 	$("#btn_img_up").click(function() {
 		document.location.href="${rootPath}/image/upload"
@@ -134,7 +156,17 @@ $(function() {
 		
 		//drop한 파일리스트 추출
 		let files=e.originalEvent.dataTransfer.files
-		
+		let fileLen=files.length
+		if(fileLen>1){
+			let formData=new FormData()
+			for(let i=0;i<files.length;i++){
+				//drop한 파일들을 모두 추가
+				formData.append('files',files[i])
+			}
+			
+			files_up(formData)
+			return false
+		} else {
 		//리스트에서 첫번째 파일만 추출
 		let file=files[0]
 
@@ -143,45 +175,59 @@ $(function() {
 		//js FormData 클래스를 사요ㅕㅇ해서 서버에 파일 업로드 준비
 		let formData=new FormData()
 		formData.append('file',file)
-		
-		$.ajax({
-			url:'${rootPath}/rest/file_up',
-			method:'POST',
-			data:formData,
-			
-			/* 파일업로드 필수옵션 */
-			processData:false,
-			contentType:false,
-			
-			success:function(result){
-				if(result=='FAIL'){
-					alert("파일업로드 오류")
-				} else{
-					/*
-					img_file 이란 id는 form:form 태그의 img_upload.jsp의 path와 이름이 같음
-					$("#img_file").val(result) 이 문장이 path 부분의 img_file에 값을 채워넣어줌
-					img_upload.jsp 에서 저장 버튼을 누르면 세팅된 값을 post로 넘겨서
-					controller에서 파일 이름만 DB에 저장
-					*/
-					$("#img_file").val(result)
-					$("#img_view").css("display","block")
-					$("#img_view").attr("src",'${rootPath}/images/'+result)
-					$("#d_d_box h3").css("display","none")
-				}
-			},
-			error:function(){
-				alert("서버통신 오류")
-			}
-		})
+		file_up(formData)
+		}
 		return false
 	})
+	
+	var contextCallBack=function(key,options){
+		if(key=='edit'){
+			let img_seq=$(this).attr("data-seq")
+			document.location.href="${rootPath}/image/update/"+img_seq
+		}
+		if(key=='delete'){
+			if(confirm("이미지를 삭제할까요?")){
+				let img_seq=$(this).attr("data-seq")
+				
+				$.ajax({
+					url:"${rootPath}/image/delete",
+					data:{img_seq:img_seq},
+					type:'POST',
+					success:function(result){
+						if(result<1)
+							alert("삭제도중 문제발생")
+					},
+					error:function(){
+						alert("서버 통신오류")
+					}
+				})
+				document.location.replace("${rootPath}/")
+				
+				//이벤트 버블링 금지
+				return false
+			}
+		}
+	}
+	
+	/*
+	jquery 응용
+	마우스제어 (오른쪽마우스 클릭:=context menu) 만들어 주는 툴
+	*/
 	$.contextMenu({
+		/*
+		어떤 태그에서 작동하게 할것인가
+		*/
 		selector:'.img_card',
 		items:{
+			/*
+			요런 메뉴를 만들겠다
+			*/
 			'edit':{name:"수정",icon:'edit'},
 			'delete':{name:"삭제",icon:'delete'}
-		}
+		},
+		callback: contextCallBack
 	})
+	
 })
 </script>
 </head>

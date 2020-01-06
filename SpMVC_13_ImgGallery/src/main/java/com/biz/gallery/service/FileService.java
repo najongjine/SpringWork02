@@ -13,9 +13,14 @@ import org.springframework.web.multipart.MultipartFile;
  */
 @Service
 public class FileService {
-	@Autowired
-	String filePath;
+	private final String filePath;
 	
+	@Autowired
+	public FileService(String filePath) {
+		super();
+		this.filePath = filePath;
+	}
+
 	public String file_up(MultipartFile mFile) {
 		if(mFile==null) {
 			return null;
@@ -44,4 +49,17 @@ public class FileService {
 		}
 		return null;
 	}
+
+	public void file_delete(String img_file) {
+		/*
+		 * filepath: /biz/files/
+		 * img_file:aaa.jpg
+		 * 결과값: /biz/files/aa.jpg 라는 형식으로 생성
+		 */
+		File file=new File(filePath,img_file);
+		if(file.exists()) {
+			file.delete();
+		}
+	}
+	
 }
