@@ -61,7 +61,6 @@ public class ImageService {
 		
 		//1 tbl_gallery에 데이터 insert
 		int ret=imDao.insert(imageVO);
-		
 		//2. 파일이름들을 imagefilesVO의 리스트 생성
 		// ImageFilesVO에 imgFile_p_code 칼럼에 tbl_gallery의 seq값을 추가해서 리스트 생성
 		List<ImageFilesVO> files=new ArrayList<ImageFilesVO>();
@@ -74,7 +73,6 @@ public class ImageService {
 			ifService.imageFileInsert(files);
 		}
 		
-		log.debug(imageVO.toString());
 		return ret;
 	}
 	public ImageVO findBySeq(String img_seq) {

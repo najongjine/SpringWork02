@@ -8,7 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.biz.rbooks.domain.DetailBookViewVO;
 import com.biz.rbooks.domain.MemberVO;
 import com.biz.rbooks.service.ReadBookService;
 
@@ -34,5 +36,18 @@ public class ReadBookController {
 		memberList.add(memberVO);
 		model.addAttribute("memberList", memberList);
 		return "home";
+	}
+	
+	public String viewDetail(@RequestParam("rb_seq")String strRb_seq, @RequestParam("b_code") String b_code
+			, @RequestParam("m_id") String m_id, Model model) {
+		long rb_seq=-1;
+		try {
+			rb_seq=Long.valueOf(strRb_seq);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		DetailBookViewVO detailBookViewVO=readBookService.viewDetailOfBook(rb_seq,b_code,m_id);
+		model.addAttribute("detailBookViewVO", detailBookViewVO);
+		return "detailview";
 	}
 }

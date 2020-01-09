@@ -33,7 +33,8 @@ var rootPath="${pageContext.request.contextPath }"
 			<c:forEach items="${memberList}" var="memberVO" varStatus="index">
 				<c:forEach items="${memberVO.booksList }" var="booksVO" varStatus="index2">
 					<c:forEach items="${booksVO.readBookList }" var="readBookVO" varStatus="index3">
-					<tr data-id="${readBookVO.rb_seq }" class="readBookVOBody">
+					<tr data-rb_seq="${readBookVO.rb_seq }" class="readBookVOBody"
+					data-b_code="${booksVO.b_code}" data-m_id="${memberVO.m_id}">
 						<td>${memberVO.m_id}</td>
 						<td>${booksVO.b_code}</td>
 						<td>${booksVO.b_name}</td>

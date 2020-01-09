@@ -1,2 +1,1 @@
-# To Do List project
-* 2019-12-30
+tbl_member_bcodes_manager 만들어줘야함

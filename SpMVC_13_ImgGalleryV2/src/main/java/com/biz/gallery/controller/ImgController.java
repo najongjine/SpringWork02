@@ -111,6 +111,7 @@ public class ImgController {
 	 */
 	@RequestMapping(value = "/files_up",method=RequestMethod.POST)
 	public String files_up(MultipartHttpServletRequest mFiles,Model model) {
+		log.debug("!!! files_up called");
 		List<ImageFilesVO> fileNames=imService.files_up(mFiles);
 		model.addAttribute("imgList", fileNames);
 		return "/include/img_card_box";

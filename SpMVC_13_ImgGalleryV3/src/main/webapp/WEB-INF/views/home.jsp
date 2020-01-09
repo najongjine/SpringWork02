@@ -265,7 +265,7 @@ $(function() {
 								alert("파일을 삭제할수 없음")
 								document.location.replace(document.location.href)
 							}
-						})
+				})
 				/* 내가한거
 				$.ajax({
 					url:"${rootPath}/image/deleteSubImg",

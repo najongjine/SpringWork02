@@ -20,17 +20,21 @@ public interface BooksDao {
 				@Result(property="b_code", column = "b_code"),
 				@Result(property = "readBookList", column = "b_code", javaType = List.class, 
 				many=@Many(select = "findReadBookByrb_bcode"))
-			}
+				}
 			)
 	public List<BooksVO> selectAll();
 	
-	@Select("select * from tbl_read_book where rb_bcode=#{rb_bcode}")
-	public List<ReadBookVO> findReadBookByrb_bcode(String rb_bcode);
-	
-	//@Select("select * from tbl_books")
-	//public List<BooksVO> selectAll();
+	@Select("select * from tbl_read_book where rb_bcode=#{b_code}")
+	public List<ReadBookVO> findReadBookByrb_bcode(String b_code);
 	
 	@Select("select * from tbl_books where b_code=#{b_code}")
+	@Results(
+			value= {
+				@Result(property="b_code", column = "b_code"),
+				@Result(property = "readBookList", column = "b_code", javaType = List.class, 
+				many=@Many(select = "findReadBookByrb_bcode"))
+				}
+			)
 	public BooksVO selectByBCode(String b_code);
 	
 	@Select("select * from tbl_books where B_NAME like '%' || #{b_name} || '%' ")

@@ -1,5 +1,5 @@
 var files_up = function(formData) {
-
+	alert("ajax files up called")
 	$.ajax({
 		url : rootPath + "/image/files_up",
 		method : 'POST',

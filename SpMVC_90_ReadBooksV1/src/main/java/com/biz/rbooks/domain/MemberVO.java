@@ -22,5 +22,5 @@ public class MemberVO {
 	private String m_login_date;//	varchar2(10 byte)
 	private String m_rem;//	nvarchar2(125 char)
 	
-	List<BooksVO> booksList=new ArrayList<BooksVO>();
+	List<MemberBCodesManagerVO> memberBCodesManagerList=new ArrayList<MemberBCodesManagerVO>();
 }
