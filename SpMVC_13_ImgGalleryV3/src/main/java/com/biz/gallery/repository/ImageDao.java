@@ -35,7 +35,7 @@ public interface ImageDao {
 	@Results(
 			value= {
 				@Result(property="img_seq", column = "img_seq"),
-				@Result(property = "img_files", column = "img_seq", javaType = List.class,
+				@Result(property = "img_files", column = "img_seq", javaType = List.class, 
 				many=@Many(select = "getFiles"))
 			}
 			)

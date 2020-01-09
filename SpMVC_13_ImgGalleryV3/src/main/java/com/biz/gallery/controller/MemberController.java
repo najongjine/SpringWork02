@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.biz.gallery.domain.MemberVO;
 import com.biz.gallery.service.MemberService;
@@ -35,6 +36,11 @@ public class MemberController {
 	public String join(MemberVO memberVO,Model model) {
 		mService.insert(memberVO);
 		return "redirect:/image/list";
+	}
+	
+	@RequestMapping(value = "/login",method=RequestMethod.GET)
+	public String login() {
+		return "body/login";
 	}
 	
 	//@ResponseBody

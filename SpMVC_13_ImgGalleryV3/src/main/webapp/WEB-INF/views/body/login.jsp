@@ -69,24 +69,34 @@ $(function() {
 		document.location.href="${rootPath}/member/join"
 	})
 	$("btn-login").click(function() {
+		//유효성 검사
+		//id, password가 입력되지 않았을때 경고
+		let u_id=$("#u_id").val()
+		if(u_id=="" || u_id==null){
+			alert("아이디를 입력하세요")
+			$("#u_id").focus()
+			return false
+		}
+		/*
 		var params=$("form").serialize();
 		$.ajax({
-			url:"${rootPath}/member/login",
+			url:"${rootPath}/rest/member/login",
 			type:'POST',
 			data:params,
-			dataType:'json',
 			success:function(result){
 				alert(result)
 			}
 		})
-		/*
-		$.post("${rootPath}/member/login",
-		{$("form").serialize()},
-		function(result) {
-			alert(result)
-		}
 		*/
-		//})
+		$.post("${rootPath}/rest/member/login",
+			$("form").serialize(),
+				function(result) {
+				alert(result)
+				//현재 열려있는 화면을 refresh
+				//document.location.replace(document.location.href) 와 비슷(요건 뒤로가기 막음)
+				document.location.href=document.location.href
+			}
+		)
 	})
 })
 </script>
@@ -101,8 +111,8 @@ $(function() {
 		<c:if test="${LOGIN_MSG == 'NO_AUTH' }">
 			<h3>작성자만 볼수있음!!!</h3>
 		</c:if>
-		<input type="text" name="u_id" placeholder="사용자 ID"> <input
-			type="password" name="u_password" placeholder="비밀번호">
+		<input type="text" name="u_id" id="u_id" placeholder="사용자 ID"> <input
+			type="password" name="u_password" id="u_password" placeholder="비밀번호">
 		<button type="submit" id="btn-login">login</button>
 		<button type="button" id="btn-join">회원가입</button>
 	</form>

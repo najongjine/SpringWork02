@@ -9,8 +9,10 @@ import java.net.URLEncoder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,11 +22,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.biz.gallery.domain.ImageFilesVO;
 import com.biz.gallery.domain.ImageVO;
+import com.biz.gallery.domain.MemberVO;
 import com.biz.gallery.repository.ImageDao;
 import com.biz.gallery.repository.ImageFilesDao;
 import com.biz.gallery.service.FileService;
 import com.biz.gallery.service.ImageFileService;
 import com.biz.gallery.service.ImageServiceV3;
+import com.biz.gallery.service.MemberService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -37,9 +41,10 @@ public class ImgRestController {
 	protected final ImageServiceV3 imService;
 	protected final ImageDao imgDao; 
 	protected final ImageFilesDao ifDao;
+	protected final MemberService mService;
 	
 	@Autowired
-	public ImgRestController(FileService fService, ImageFileService ifService, ImageServiceV3 imService,
+	public ImgRestController(MemberService mService, FileService fService, ImageFileService ifService, ImageServiceV3 imService,
 			ImageDao imgDao, ImageFilesDao ifDao) {
 		super();
 		this.fService = fService;
@@ -47,6 +52,7 @@ public class ImgRestController {
 		this.imService = imService;
 		this.imgDao = imgDao;
 		this.ifDao = ifDao;
+		this.mService=mService;
 	}
 	
 	@RequestMapping(value = "/file_up",method=RequestMethod.POST,produces = "text/html;charset=UTF-8")
@@ -159,5 +165,17 @@ public class ImgRestController {
 		imageVO.setImg_file(img_file);
 		int ret=imgDao.update(imageVO);
 		return ret+"";
+	}
+	
+	@RequestMapping(value = "/member/login",method=RequestMethod.POST)
+	public String login(MemberVO memberVO, Model model, HttpSession httpSession) {
+		memberVO=mService.loginCheck(memberVO);
+		if(memberVO!=null) {
+			httpSession.setAttribute("MEMBER", memberVO);
+			return "LOGIN_OK";
+		} else {
+			httpSession.removeAttribute("MEMBER");
+			return "LOGIN_FAIL";
+		}
 	}
 }

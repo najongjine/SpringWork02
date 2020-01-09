@@ -53,11 +53,12 @@ public class ImgController {
 	@RequestMapping(value = "/upload",method=RequestMethod.GET)
 	public String upload(@ModelAttribute("imageVO") ImageVO imageVO,Model model,
 			HttpSession httpSession) {
-		MemberVO member=(MemberVO) httpSession.getAttribute("MEMBER");
+		//login check
+		/*MemberVO member=(MemberVO) httpSession.getAttribute("MEMBER");
 		if(member==null) {
 			model.addAttribute("MODAL", "LOGIN");
 			return "home";
-		}
+		}*/
 		imageVO=new ImageVO();
 		model.addAttribute("BODY", "UPLOAD");
 		model.addAttribute("imageVO", imageVO);
@@ -81,7 +82,13 @@ public class ImgController {
 	 * @PathVariable: path/값 형식으로 전송하고 변수에서 받기
 	 */
 	@RequestMapping(value = "/update/{img_seq}",method=RequestMethod.GET)
-	public String update(@PathVariable("img_seq") String img_seq,Model model) {
+	public String update(@PathVariable("img_seq") String img_seq,Model model, HttpSession httpSession) {
+		//로그인이 됬는지 아닌지만 검사. Object형 session 객체를 추출.
+		/*Object memberVO=httpSession.getAttribute("MEMBER");
+		if(memberVO==null) {
+			model.addAttribute("MODAL", "LOGIN");
+			return "home";
+		}*/
 		ImageVO imgVO=imService.findBySeq(img_seq);
 		model.addAttribute("BODY", "UPLOAD");
 		model.addAttribute("imageVO", imgVO);
@@ -106,7 +113,13 @@ public class ImgController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/delete",method=RequestMethod.POST)
-	public String delete(@RequestParam("img_seq") String img_seq, SessionStatus status,Model model) {
+	public String delete(@RequestParam("img_seq") String img_seq, SessionStatus status,Model model,
+			HttpSession httpSession) {
+		Object memberVO=httpSession.getAttribute("MEMBER");
+		if(memberVO==null) {
+			model.addAttribute("MODAL", "LOGIN");
+			return "home";
+		}
 		int ret=imService.delete(img_seq);
 		status.setComplete();
 		return ret+"";
@@ -125,7 +138,12 @@ public class ImgController {
 	
 	@ResponseBody //내가 만든거
 	@RequestMapping(value = "/deleteSubImg",method=RequestMethod.POST)
-	public String deleteSubImg(@RequestParam("img_file_seq") String strSeq) {
+	public String deleteSubImg(@RequestParam("img_file_seq") String strSeq,HttpSession httpSession,Model model) {
+		Object memberVO=httpSession.getAttribute("MEMBER");
+		if(memberVO==null) {
+			model.addAttribute("MODAL", "LOGIN");
+			return "home";
+		}
 		long img_file_seq=-1;
 		try {
 			img_file_seq=Long.valueOf(strSeq);

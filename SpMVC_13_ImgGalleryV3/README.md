@@ -51,3 +51,23 @@
 * <input name="main[0]" value="1번">
 *	<input name="main[1]" value="2번">
 *	<input name="main[2]" value="3번"> 
+
+
+### HttpSession
+* http는 특성상 req가 이루어지고 결과를 response 하게되면 web browser와 server간에 어떠한 정보도 남지 않게된다.
+ statusless.
+* 통신에서는 같은 client에서 같은 주소로 서버에 자주 req를 수행하는 경우가 많다.
+* 이때 client가 요청한 req에대한 정보를 server가 참조하고 싶을때가 있다. (login 정보)
+* 과거에는 쿠키를 사용. 쿠키 만들어서 보내고 req때 쿠키정보를 분석함.
+* Session 도입됨. java기반 서버(was) 에선 httpsession 클래스를 이용.
+*서버는 필요할때 httpsession 객체에 attribute를 추가하면 java에서 사용할수있는
+ 어떤 데이터라도 sessikon 형 데이터로 만들수 있다.
+* httpSession.setattribute("member",membervo) 형태로 코딩을 하게되면 memberVO객체에 담긴 모든 데이터가 서버 기억장치 어딘가에 보관되고 , member라는 이름으로 session id가 생성된다.
+* 이때 session id는 자체적으로 특별한 방법으로 암호화된 값으로 변환된다.
+* 서버에서 res를 수행하면 자동으로 res body에 이 session id값이 추가되어 client로 보내진다.
+* client는 수신된 res정보에 session id가ㅣ 있으면 cookie영역에 임시보관을 한다.
+* 이후에 client에서 req를 보낼때 이 session id를 첨가하여 서버로 보낸다.
+* 서버(spring)에서는 req정보에 sessino id가 있으면 해당 session 객체를 메모리에서 찾아보고 session id가 유효하면
+ 그 객체를 controller의 method에 주입한다.
+* controller의 method에서는 HttpSession 형식의 매게변수를 선언해두면 해당 객체에 session 객체값이 겸겨있어서 코드에서
+사용할수 있다. 
