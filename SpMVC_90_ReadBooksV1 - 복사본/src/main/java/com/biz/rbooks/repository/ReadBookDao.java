@@ -29,7 +29,4 @@ public interface ReadBookDao {
 	
 	@Delete("delete from tbl_read_book where rb_seq=#{rb_seq}")
 	public int delete(long rb_seq);
-
-	@Select("select * from tbl_read_book where rb_seq= (select max(rb_seq) from tbl_read_book)")
-	public ReadBookVO findMaxRBSeq();
 }

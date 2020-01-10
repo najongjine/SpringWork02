@@ -34,10 +34,8 @@ public interface MemberBCodesManagerDao {
 	public MemberBCodesManagerVO findByMngMID(String mng_member_id);
 	
 	@Insert("insert into tbl_member_bcodes_manager ( "
-			+"MNG_SEQ, "
 			+ "mng_b_code, "
 			+ "mng_member_id) values( "
-			+"seq_member_bcodes_manager.nextval, "
 			+ "#{mng_b_code,jdbcType=VARCHAR}, "
 			+ "#{mng_member_id,jdbcType=VARCHAR}) ")
 	public int insert(MemberBCodesManagerVO memberBCodesManagerVO);

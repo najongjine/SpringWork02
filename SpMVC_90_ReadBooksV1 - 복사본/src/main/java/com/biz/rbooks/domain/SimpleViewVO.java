@@ -20,5 +20,4 @@ public class SimpleViewVO {
 	private String rb_date;
 	private String rb_subject;
 	private int tb_star;
-	private long rb_seq;
 }

@@ -31,14 +31,14 @@ public class ReadBookSQL {
 		return new SQL() {
 			{
 				UPDATE("tbl_read_book");
-				WHERE("RB_SEQ =#{rb_seq,jdbcType=VARCHAR}");
-				SET("RB_BCODE= #{rb_bcode,jdbcType=VARCHAR}");
-				SET("RB_DATE =#{rb_date,jdbcType=VARCHAR}");
-				SET("RB_STIME =#{rb_stime,jdbcType=VARCHAR}");
-				SET("RB_RTIME =#{rb_rtime,jdbcType=VARCHAR}");
-				SET("RB_SUBJECT= #{rb_subject,jdbcType=VARCHAR}");
-				SET("RB_TEXT =#{rb_text,jdbcType=VARCHAR}");
-				SET("RB_STAR= #{rb_star,jdbcType=VARCHAR}");
+				WHERE("RB_SEQ =rb_seq,jdbcType=VARCHAR}");
+				SET("RB_BCODE= rb_bcode,jdbcType=VARCHAR}");
+				SET("RB_DATE =rb_date,jdbcType=VARCHAR}");
+				SET("RB_STIME =rb_stime,jdbcType=VARCHAR}");
+				SET("RB_RTIME =rb_rtime,jdbcType=VARCHAR}");
+				SET("RB_SUBJECT= rb_subject,jdbcType=VARCHAR}");
+				SET("RB_TEXT =rb_text,jdbcType=VARCHAR}");
+				SET("RB_STAR= rb_star,jdbcType=VARCHAR}");
 			}
 		}.toString();
 	}

@@ -18,9 +18,6 @@ var rootPath="${pageContext.request.contextPath }"
 
 </head>
 <body>
-<header>
-	<%@ include file="/WEB-INF/views/include/nav.jsp" %>
-</header>
 <section>
 	<table border="1">
 		<tr>

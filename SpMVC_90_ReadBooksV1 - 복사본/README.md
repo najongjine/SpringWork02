@@ -1,0 +1,1 @@
+tbl_member_bcodes_manager 만들어줘야함

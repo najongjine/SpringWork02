@@ -13,12 +13,9 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @Builder
-public class SimpleViewVO {
-	private String m_id;
-	private String b_code;
-	private String b_name;
-	private String rb_date;
-	private String rb_subject;
-	private int tb_star;
-	private long rb_seq;
+public class MemberBCodesManagerVO {
+	private String mng_b_code; // PK
+	private String mng_member_id; //FK
+	
+	private BooksVO booksVO;
 }

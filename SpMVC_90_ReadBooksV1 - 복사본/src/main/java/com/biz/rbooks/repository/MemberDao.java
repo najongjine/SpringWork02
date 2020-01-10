@@ -45,7 +45,4 @@ public interface MemberDao {
 	
 	@Delete("delete from tbl_member where m_id=#{m_id}")
 	public int delete(String m_id);
-	
-	@Select("select count(*) from tbl_member")
-	public int countMembers();
 }

@@ -1,5 +1,6 @@
 package com.biz.rbooks.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.biz.rbooks.domain.BooksVO;
 import com.biz.rbooks.domain.DetailBookViewVO;
-import com.biz.rbooks.domain.SimpleViewVO;
+import com.biz.rbooks.domain.MemberVO;
 import com.biz.rbooks.service.ReadBookService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @RequestMapping("/readbook")
 public class ReadBookController {
+	
 	private final ReadBookService readBookService;
 	
 	@Autowired
@@ -30,31 +31,23 @@ public class ReadBookController {
 
 	@RequestMapping(value = "/showalllist",method = RequestMethod.GET)
 	public String showAllList(Model model) {
-		List<SimpleViewVO> simepleViewList=readBookService.showAllSummary();
-		log.debug("!!! simepleViewList in controller:"+simepleViewList.toString());
-		model.addAttribute("simepleViewList", simepleViewList);
-		return "simpleviewsummary";
+		MemberVO memberVO=readBookService.makeTestData();
+		List<MemberVO> memberList=new ArrayList<MemberVO>();
+		memberList.add(memberVO);
+		model.addAttribute("memberList", memberList);
+		return "home";
 	}
 	
-	@RequestMapping(value = "/viewdetail",method=RequestMethod.GET)
 	public String viewDetail(@RequestParam("rb_seq")String strRb_seq, @RequestParam("b_code") String b_code
-			, @RequestParam("m_id") String _m_id, Model model) {
+			, @RequestParam("m_id") String m_id, Model model) {
 		long rb_seq=-1;
 		try {
 			rb_seq=Long.valueOf(strRb_seq);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		DetailBookViewVO detailBookViewVO=readBookService.viewDetailOfBook(rb_seq,b_code,_m_id);
+		DetailBookViewVO detailBookViewVO=readBookService.viewDetailOfBook(rb_seq,b_code,m_id);
 		model.addAttribute("detailBookViewVO", detailBookViewVO);
-		return "/detailview";
+		return "detailview";
 	}
-	
-	@RequestMapping(value = "/viewAllBooks",method=RequestMethod.GET)
-	public String viewAllBooks(Model model) {
-		List<BooksVO> booksList=readBookService.viewAllBooks();
-		model.addAttribute("booksList", booksList);
-		return "/viewallbooks";
-	}
-	
 }

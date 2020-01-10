@@ -59,8 +59,8 @@ $(function() {
 			success:function(result){
 				
 				// id=p_sub_list 라는 영역에 result에 있는 html코드를 html 페이지 안에 뿌려버린다
-				$("#p_sub_list").html("")
-				$("#p_sub_list").html(result)
+				$("#updateReadBook").html("")
+				$("#updateReadBook").html(result)
 			}
 		})
 		//getProInfo(p_code)
