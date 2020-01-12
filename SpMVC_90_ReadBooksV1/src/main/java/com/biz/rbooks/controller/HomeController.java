@@ -25,7 +25,7 @@ public class HomeController {
 		
 		String formattedDate = dateFormat.format(date);
 		
-		return "redirect:/readbook/showalllist";
+		return "redirect:/readbook/simpleViewList";
 	}
 	
 }

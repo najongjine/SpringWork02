@@ -45,12 +45,12 @@ public class MemberController {
 		} else {
 			httpSession.removeAttribute("memberVO");
 		}
-		return "redirect:/readbook/showalllist";
+		return "redirect:/readbook/simpleViewList";
 	}
 	
 	@RequestMapping(value = "/register",method=RequestMethod.GET)
 	public String register() {
-		return "register";
+		return "/register";
 	}
 	
 	@RequestMapping(value = "/register",method=RequestMethod.POST)
@@ -59,6 +59,6 @@ public class MemberController {
 		if(ret<1) {
 			log.debug("!!!화원가입 안됨!!!");
 		}
-		return "redirect:/readbook/showalllist";
+		return "redirect:/readbook/simepleViewList";
 	}
 }

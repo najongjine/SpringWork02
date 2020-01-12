@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Many;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
@@ -12,6 +13,7 @@ import org.apache.ibatis.annotations.Update;
 
 import com.biz.rbooks.domain.BooksVO;
 import com.biz.rbooks.domain.MemberBCodesManagerVO;
+import com.biz.rbooks.domain.ReadBookVO;
 
 public interface MemberBCodesManagerDao {
 	@Select("select * from tbl_member_bcodes_manager")
@@ -27,17 +29,21 @@ public interface MemberBCodesManagerDao {
 	@Select("select * from tbl_books where b_code=#{mng_b_code}")
 	public BooksVO findBookByBCode(String mng_b_code);
 	
+	@Select("select * from tbl_read_book where m_id=#{mng_member_id}")
+	public List<ReadBookVO> findReadBookByM_ID(String mng_member_id);
+	
 	@Select("select * from tbl_member_bcodes_manager where mng_b_code=#{mng_b_code}")
 	public MemberBCodesManagerVO findByMngBCode(String mng_b_code);
 	
 	@Select("select * from tbl_member_bcodes_manager where mng_member_id=#{mng_member_id}")
 	public MemberBCodesManagerVO findByMngMID(String mng_member_id);
 	
+	@Select("select distinct count(*) from TBL_MEMBER_BCODES_MANAGER where MNG_MEMBER_ID=#{m_id}")
+	public int countMemberBCodesManager(String m_id);
+	
 	@Insert("insert into tbl_member_bcodes_manager ( "
-			+"MNG_SEQ, "
 			+ "mng_b_code, "
 			+ "mng_member_id) values( "
-			+"seq_member_bcodes_manager.nextval, "
 			+ "#{mng_b_code,jdbcType=VARCHAR}, "
 			+ "#{mng_member_id,jdbcType=VARCHAR}) ")
 	public int insert(MemberBCodesManagerVO memberBCodesManagerVO);

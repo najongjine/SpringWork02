@@ -9,25 +9,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>□□□ My JSP Page □□□</title>
-<!-- 
-<link rel="stylesheet" href="${rootPath}/css/alterReadBook.css?ver=20191228002" type="text/css">
- -->
- <script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script>
-var rootPath="${pageContext.request.contextPath }"
-var memberVO_m_id="${memberVO.m_id}"
-</script>
-<script src="${rootPath }/js/alterReadBook.js?ver=3"></script>
-
 
 </head>
 <body>
 <header>
 	<%@ include file="/WEB-INF/views/include/nav.jsp" %>
 </header>
-<section class="update-form">
-<form:form modelAttribute="readBookVO" action="${rootPath}/alter/updateReadBook" method="post">
+<section class="insert-form">
+<form:form modelAttribute="readBookVO" action="${rootPath}/alter/insertReadBook" method="post">
 	<table>
 		<tr>
 		<td>m_id:</td>
@@ -36,38 +25,42 @@ var memberVO_m_id="${memberVO.m_id}"
 		</td>
 		</tr>
 			<tr>
-			<td>일렬번호</td>
+			<td>일렬번호:</td>
 			<td>
-				<form:input readonly="readonly" path="rb_seq" placeholder="${readBookVO.rb_seq}"/>
+				<form:input readonly="true" path="rb_seq" placeholder="${readBookVO.rb_seq}"/>
 			</td>
 			</tr>
 			
 			<tr>
-			<td>책코드</td>
+			<td>책코드:</td>
 			<td>
-				<form:input readonly="readonly" path="rb_bcode" placeholder="${readBookVO.rb_bcode}"/>
+				<form:input readonly="true" path="rb_bcode" placeholder="${readBookVO.rb_bcode}"/>
 			</td>
 			</tr>
 			
 			<tr>
-			<td>읽은날자</td>
+			<td>날짜:</td>
 			<td>
-				<form:input type="text" path="rb_date" placeholder="${readBookVO.rb_date}"/>
+				<form:input readonly="true" path="rb_date" placeholder="${readBookVO.rb_date}"/>
 			</td>
 			</tr>
 			
 			<tr>
-			<td>읽기 시작시간</td>
+			<td>읽기 시작시간:</td>
 			<td>
-				<form:input type="text" path="rb_stime" placeholder="${readBookVO.rb_stime}"/>
+				<form:input readonly="true" path="rb_stime" placeholder="${readBookVO.rb_stime}"/>
 			</td>
 			</tr>
 			
 			<tr>
-			<td>총 읽은시간</td>
 			<td>
-				<form:input type="text" path="rb_rtime" placeholder="${readBookVO.rb_rtime}"/>
+				<form:input type="hidden" path="rb_rtime" placeholder="${readBookVO.rb_rtime}"/>
 			</td>
+			</tr>
+			
+			<tr>
+			<td>--------</td>
+			<td>--------</td>
 			</tr>
 			
 			<tr>
@@ -92,14 +85,7 @@ var memberVO_m_id="${memberVO.m_id}"
 			</tr>
 			
 			<tr>
-			<c:choose>
-			<c:when test="${MODE=='UPDATE' }">
-				<td><button>수정</button></td>
-			</c:when>
-			<c:otherwise>
 				<td><button>책 다 읽음</button></td>
-			</c:otherwise>
-			</c:choose>
 			</tr>
 			
 			<tr>

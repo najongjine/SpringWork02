@@ -18,7 +18,7 @@
 			<mvc:mapping path="/alter/psersonReadBook*"/>
 			<mvc:mapping path="/alter/delete**/**"/>
 			<mvc:mapping path="/alter/update**/*"/>
-			<mvc:exclude-mapping path="/readbook*"/>
+			<mvc:mapping path="/alter/insert**/*"/>
 			<ref bean="auth"/>
 		</mvc:interceptor>
 	</mvc:interceptors>

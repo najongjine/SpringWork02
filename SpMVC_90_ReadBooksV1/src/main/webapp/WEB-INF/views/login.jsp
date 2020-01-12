@@ -29,7 +29,7 @@
 	<tr>
 		<td><button>로그인</button></td>
 		<td>
-		<a href="${rootPath}/member">
+		<a href="${rootPath}/member/register">
 		<button>회원가입</button>
 		</a>
 		</td>

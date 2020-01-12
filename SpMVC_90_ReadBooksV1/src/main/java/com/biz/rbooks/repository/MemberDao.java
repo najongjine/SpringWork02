@@ -11,6 +11,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.UpdateProvider;
 
 import com.biz.rbooks.domain.MemberBCodesManagerVO;
+import com.biz.rbooks.domain.MemberNReadBookVO;
 import com.biz.rbooks.domain.MemberVO;
 
 public interface MemberDao {
@@ -36,6 +37,11 @@ public interface MemberDao {
 				}
 			)
 	public MemberVO findByM_ID(String m_id);
+	
+	@Select("select * from tbl_member "
+			+ "left join tbl_read_book "
+			+ "on tbl_member.m_id=tbl_read_book.rb_mid where m_id=#{m_id}")
+	public List<MemberNReadBookVO> findByM_Id_MemberNReadBookVO(String m_id);
 	
 	@UpdateProvider(type = MemberSQL.class,method = "updateSQL")
 	public int update(MemberVO memberVO);

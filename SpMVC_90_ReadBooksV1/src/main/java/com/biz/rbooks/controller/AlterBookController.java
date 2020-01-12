@@ -20,16 +20,18 @@ import com.biz.rbooks.repository.MemberDao;
 import com.biz.rbooks.repository.ReadBookDao;
 import com.biz.rbooks.service.AlterBookService;
 import com.biz.rbooks.service.ReadBookService;
+import com.biz.rbooks.service.util.TimeCalculationService;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
-@SessionAttributes("{readBookVO}")
+@SessionAttributes("{readBookVO},{booksVO}")
 @RequestMapping(value = "/alter")
 public class AlterBookController {
 	private final ReadBookService readBookService;
 	private final AlterBookService alterBookService;
+	private final TimeCalculationService timeCalculationService;
 	
 	private final ReadBookDao readBookDao;
 	private final BooksDao booksDao;
@@ -39,7 +41,7 @@ public class AlterBookController {
 	@Autowired
 	public AlterBookController(ReadBookService readBookService, AlterBookService alterBookService,
 			ReadBookDao readBookDao, BooksDao booksDao, MemberDao memberDao,
-			MemberBCodesManagerDao memberBCodesManagerDao) {
+			MemberBCodesManagerDao memberBCodesManagerDao, TimeCalculationService timeCalculationService) {
 		super();
 		this.readBookService = readBookService;
 		this.alterBookService = alterBookService;
@@ -47,11 +49,17 @@ public class AlterBookController {
 		this.booksDao = booksDao;
 		this.memberDao = memberDao;
 		this.memberBCodesManagerDao = memberBCodesManagerDao;
+		this.timeCalculationService=timeCalculationService;
 	}
 
 	@Autowired
 	public ReadBookVO makeReadBookVO() {
 		return new ReadBookVO();
+	}
+	
+	@Autowired
+	public BooksVO makeBooksVO() {
+		return new BooksVO();
 	}
 	
 	@RequestMapping(value = "/updateReadBook", method=RequestMethod.GET)
@@ -92,6 +100,7 @@ public class AlterBookController {
 	@RequestMapping(value = "/updateReadBook", method=RequestMethod.POST)
 	public String updateReadBook(@ModelAttribute("readBookVO") ReadBookVO readBookVO, 
 			String _m_id,Model model) {
+		log.debug("!!! updatebook post called");
 		long rb_seq=-1;
 		try {
 			rb_seq=Long.valueOf(readBookVO.getRb_seq());
@@ -100,24 +109,36 @@ public class AlterBookController {
 		}
 		String b_code=readBookVO.getRb_bcode();
 		
+		log.debug("!!! b4 update");
 		int ret=alterBookService.updateReadBook(readBookVO);
+		log.debug("!!! after update");
 		
 		model.addAttribute("rb_seq", rb_seq);
-		model.addAttribute("b_code", b_code);
 		model.addAttribute("m_id", _m_id);
-		return "redirect:/readbook/viewdetail";
+		return "redirect:/readbook/myBookList";
 	}
 	
-	@RequestMapping(value = "/psersonReadBook",method=RequestMethod.GET)
-	public String insertReadBook(@ModelAttribute("readBookVO") ReadBookVO readBookVO, String _b_code,
+	@RequestMapping(value = "/insertReadBook",method=RequestMethod.GET)
+	public String insertReadBook(@ModelAttribute("readBookVO") ReadBookVO readBookVO,String _b_code,
+			Model model, HttpSession httpSession) {
+		readBookVO=alterBookService.makeNewReadBookVO(_b_code,httpSession);
+		readBookVO.setRb_date(timeCalculationService.getCurDate());
+		readBookVO.setRb_stime(timeCalculationService.getCurTime());
+		model.addAttribute("readBookVO", readBookVO);
+		return "/insertReadBook";
+	}
+	
+	@RequestMapping(value = "/insertReadBook",method=RequestMethod.POST)
+	public String insertReadBook(@ModelAttribute("readBookVO") ReadBookVO readBookVO, 
 			HttpSession httpSession, Model model) {
-		BooksVO booksVO=booksDao.selectByBCode(_b_code);
-		int ret=alterBookService.insertReadBook(booksVO,httpSession);
-		readBookVO=readBookDao.findMaxRBSeq();
+		log.debug("!!! insertReadBook post called");
+		log.debug(readBookVO.toString());
+		BooksVO booksVO=booksDao.selectByBCode(readBookVO.getRb_bcode());
+		int ret=alterBookService.insertReadBook(booksVO,httpSession,readBookVO);
 		model.addAttribute("readBookVO", readBookVO);
 		model.addAttribute("b_name", booksVO.getB_name());
 		log.debug("!!! psersonReadBook get readBookVO:"+readBookVO.toString() );
-		return "/alterReadBook";
+		return "redirect:/readbook/simpleViewList";
 	}
 	
 	@RequestMapping(value = "/deleteBook",method=RequestMethod.POST)
@@ -126,24 +147,30 @@ public class AlterBookController {
 		return "redirect:/readbook/showalllist";
 	}
 	
-	@RequestMapping(value = "/deleteReadBook",method=RequestMethod.POST)
-	public String deleteReadBook(String _rb_seq,Model model) {
-		log.debug("!!! deleteReadBook called" );
-		long rb_seq=-1;
-		try {
-			rb_seq=Long.valueOf(_rb_seq);
-		} catch (Exception e) {
-			log.debug("!!! updateReadBook post controller 자료형 변환중 에러");
-		}
-		ReadBookVO readBookVO=readBookDao.findByRB_SEQ(rb_seq);
-		String b_code=readBookVO.getRb_bcode();
-		
-		int ret=readBookDao.delete(rb_seq);
-		log.debug("!!!ret:"+ret);
-		model.addAttribute("rb_seq", rb_seq);
-		model.addAttribute("b_code", b_code);
-		model.addAttribute("m_id", "test1");
-		model.addAttribute("OK", "OK");
-		return "redirect:/readbook/viewdetail";
+	@RequestMapping(value = "/insertBook",method=RequestMethod.GET)
+	public String insertBook(@ModelAttribute("booksVO") BooksVO booksVO,Model model) {
+		booksVO=new BooksVO();
+		model.addAttribute("booksVO", booksVO);
+		return "/insertBook";
+	}
+	
+	@RequestMapping(value = "/insertBook",method=RequestMethod.POST)
+	public String insertBook(@ModelAttribute("booksVO") BooksVO booksVO,Model model, String post) {
+		int ret=booksDao.insert(booksVO);
+		return "redirect:/readbook/viewAllBooks";
+	}
+	
+	@RequestMapping(value = "/updateBook",method=RequestMethod.GET)
+	public String updateBook(@ModelAttribute("booksVO") BooksVO booksVO, String _b_code,Model model) {
+		log.debug("!!! updateBook get control");
+		booksVO=booksDao.selectByBCode(_b_code);
+		model.addAttribute("booksVO", booksVO);
+		return "/updateBook";
+	}
+	
+	@RequestMapping(value = "/updateBook",method=RequestMethod.POST)
+	public String updateBook(@ModelAttribute("booksVO") BooksVO booksVO, Model model) {
+		int ret=booksDao.update(booksVO);
+		return "redirect:/readbook/viewAllBooks";
 	}
 }

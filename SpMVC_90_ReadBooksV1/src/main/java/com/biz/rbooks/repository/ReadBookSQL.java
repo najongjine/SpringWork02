@@ -15,6 +15,7 @@ public class ReadBookSQL {
 				INTO_COLUMNS("RB_SUBJECT");
 				INTO_COLUMNS("RB_TEXT");
 				INTO_COLUMNS("RB_STAR");
+				INTO_COLUMNS("RB_MID");
 				
 				INTO_VALUES("seq_read_book.nextval");
 				INTO_VALUES("#{rb_bcode,jdbcType=VARCHAR}");
@@ -24,6 +25,7 @@ public class ReadBookSQL {
 				INTO_VALUES("#{rb_subject,jdbcType=VARCHAR}");
 				INTO_VALUES("#{rb_text,jdbcType=VARCHAR}");
 				INTO_VALUES("#{rb_star,jdbcType=VARCHAR}");
+				INTO_VALUES("#{rb_mid,jdbcType=VARCHAR}");
 			}
 		}.toString();
 	}

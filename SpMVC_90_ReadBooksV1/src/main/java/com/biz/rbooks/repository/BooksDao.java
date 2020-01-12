@@ -24,10 +24,10 @@ public interface BooksDao {
 			)
 	public List<BooksVO> selectAll();
 	
-	@Select("select * from tbl_read_book where rb_bcode=#{b_code}")
+	@Select("select * from tbl_read_book where rb_bcode=#{b_code,jdbcType=VARCHAR}")
 	public List<ReadBookVO> findReadBookByrb_bcode(String b_code);
 	
-	@Select("select * from tbl_books where b_code=#{b_code}")
+	@Select("select * from tbl_books where b_code=#{b_code,jdbcType=VARCHAR}")
 	@Results(
 			value= {
 				@Result(property="b_code", column = "b_code"),
@@ -37,7 +37,7 @@ public interface BooksDao {
 			)
 	public BooksVO selectByBCode(String b_code);
 	
-	@Select("select * from tbl_books where B_NAME like '%' || #{b_name} || '%' ")
+	@Select("select * from tbl_books where B_NAME like '%' || #{b_name,jdbcType=VARCHAR} || '%' ")
 	public List<BooksVO> selectByBName(String b_name);
 	
 	@InsertProvider(type=BooksSQL.class,method = "insertSQL")
@@ -46,6 +46,6 @@ public interface BooksDao {
 	@UpdateProvider(type = BooksSQL.class,method = "updateSQL")
 	public int update(BooksVO booksVO);
 	
-	@Delete("delete from tbl_books where b_code=#{b_code}")
+	@Delete("delete from tbl_books where b_code=#{b_code,jdbcType=VARCHAR}")
 	public int delete(String b_code);
 }

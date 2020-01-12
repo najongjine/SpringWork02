@@ -50,7 +50,7 @@ public class ReadBookService {
 		long rb_seq=-1;
 		
 		for(MemberVO memberVO: memberList) {
-			m_id=memberVO.getM_id();
+			//m_id=memberVO.getM_id();
 			log.debug("!!! ? getMemberBCodesManagerList:"+ memberVO.getMemberBCodesManagerList().toString());
 			
 			for(MemberBCodesManagerVO memberBCodesManagerVO:memberVO.getMemberBCodesManagerList()) {
@@ -64,7 +64,7 @@ public class ReadBookService {
 						return (int) (o2.getRb_seq()-o2.getRb_seq());
 					}
 				});
-				
+				m_id=
 				b_code=memberBCodesManagerVO.getMng_b_code();
 				b_name=memberBCodesManagerVO.getBooksVO().getB_name();
 				int readBookListSize=memberBCodesManagerVO.getBooksVO().getReadBookList().size();
@@ -90,13 +90,6 @@ public class ReadBookService {
 		}
 		log.debug("!!! simpleViewList:"+simpleViewList.toString());
 		return simpleViewList;
-	}
-	
-	public MemberVO makeTestData() {
-		MemberVO memberVO=memberDao.findByM_ID("test1");
-		List<BooksVO> booksList=booksDao.selectAll();
-		
-		return memberVO;
 	}
 
 	public DetailBookViewVO viewDetailOfBook(long rb_seq, String b_code, String _m_id) {

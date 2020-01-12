@@ -1,11 +1,11 @@
 $(function() {
 	$(document).on("click",".readbook",function() {
 		let rb_seq=$(this).attr("data-rb_seq")
-		let m_id=$(this).attr("data-m_id")
-		if(memberVO_m_id!=m_id){
+		let rb_bcode=$(this).attr("data-b_code")
+		let record_m_id=$(this).attr("data-rb_mid")
+		if(memberVO_m_id!=record_m_id){
 			return false
 		}
-		alert("works")
 		/*if(modal=='UPDATE'){
 			alert(modal)
 			$(".update-form").css("display","block")

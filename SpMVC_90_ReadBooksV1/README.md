@@ -1,1 +1,1 @@
-tbl_member_bcodes_manager 만들어줘야함
+전체 페이지를 저장했다가 다시 보여주기 가능?
