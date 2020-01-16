@@ -8,10 +8,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>□□□ My JSP Page □□□</title>
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<link href="${rootPath}/css/rbook-main.css?ver=2020-01-14-001" rel="stylesheet" type="text/css">
-<link href="${rootPath}/css/main-table.css?ver=2020-01-14-001" rel="stylesheet" type="text/css">
-<link href="${rootPath}/css/color.css?ver=2020-01-14-001" rel="stylesheet" type="text/css">
+<%@ include file="/WEB-INF/views/include/include-head.jspf" %>
 <script type="text/javascript">
 $(function() {
 	$("#btn-write").click( ()=> {

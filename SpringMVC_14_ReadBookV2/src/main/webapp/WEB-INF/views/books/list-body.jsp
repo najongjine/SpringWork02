@@ -7,23 +7,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<%@ include file="/WEB-INF/views/include/include-head.jspf" %>
 <script type="text/javascript">
 $(function() {
-	$("#btn-write").click( ()=> {
-		document.location.href="${rootPath}/book/write"
+	$("#search-table tr").click(function() {
+		let trs=$(this).children()
+		let b_code=trs.eq(0).text()
+		let b_name=trs.eq(1).text()
+		
+		//val()에 아무것도 없으면 값 뽑아ㅓ오고, 넣어주면 갑 보내주기
+		$("#rb_bcode").val(b_code)
+		$("#rb_bname").val(b_name)
+		$("#modal-box").css("display","none")
 	})
 })
 </script>
 </head>
 <body>
-<header>
-	<h2>My Read Book</h2>
-</header>
-<%@ include file="/WEB-INF/views/include/include-nav.jspf" %>
 
-<section id="main-list">
-	<table id="main-table">
+<section id="search-list">
+	<table id="search-table">
 		<thead>
 		<tr>
 			<th>도서코드</th>
@@ -49,10 +51,5 @@ $(function() {
 	</table>
 </section>
 
-<section>
-	<div id="main-button">
-		<button id="btn-write" class="biz-blue flex-right">독서록 작성</button>
-	</div>
-</section>
 </body>
 </html>

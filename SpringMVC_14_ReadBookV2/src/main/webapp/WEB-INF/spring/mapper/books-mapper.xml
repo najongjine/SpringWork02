@@ -4,7 +4,20 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
  <mapper namespace="com.biz.rbooks.repository.BookDao">
- 
+ 	<select id="findByNames" resultType="bookVO">
+ 		select * from tbl_books
+ 		<where>
+	 		<foreach collection="names" item="bVO" index="index" separator="OR">
+	 			b_name like '%' || #{bVO} || '%' 
+	 		</foreach>
+ 		</where>
+ 	</select>
+ 	<select id="findByNames2" resultType="bookVO">
+ 		select * from tbl_books
+ 		<foreach collection="names" item="bVO" index="index" separator="OR" open="WHERE">
+ 			b_name like '%' || #{bVO} || '%' 
+ 		</foreach>
+ 	</select>
  	<insert id="insert" parameterType="bookVO">
  	insert into tbl_books(
  		B_CODE,
