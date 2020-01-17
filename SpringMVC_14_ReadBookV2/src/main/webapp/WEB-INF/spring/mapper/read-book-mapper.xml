@@ -19,6 +19,23 @@
 		from tbl_read_book R,tbl_books B
 		where r.rb_bcode=b.b_code
 	</select>
+	<select id="findByBCode" resultType="rBookVO">
+		select
+		RB_SEQ,
+		RB_MID,
+		RB_BCODE,
+		b_name as rb_bname,
+		RB_DATE,
+		RB_STIME,
+		RB_RTIME,
+		RB_SUBJECT,
+		RB_TEXT,
+		RB_STAR
+		from tbl_read_book R,tbl_books B
+		where
+	    R.rb_bcode=#{b_code,jdbcType=VARCHAR}
+	    and r.rb_bcode=b.b_code
+	</select>
 	<select id="findBySeq" resultType="rBookVO">
 		select
 		RB_SEQ,
@@ -32,7 +49,8 @@
 		RB_TEXT,
 		RB_STAR
 		from tbl_read_book R,tbl_books B
-		where r.rb_bcode=b.b_code AND R.rb_seq=#{rb_seq}
+		where r.rb_bcode=b.b_code AND
+		R.rb_seq=#{rb_seq}
 	</select>
 	<insert id="insert" parameterType="rBookVO">
 		insert into tbl_read_book(

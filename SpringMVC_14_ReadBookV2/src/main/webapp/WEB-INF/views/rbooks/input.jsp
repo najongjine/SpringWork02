@@ -37,7 +37,7 @@ $(function() {
 	input box에 내용이 있을때 focus()가 위치하면
 	내용을 전체 블록설정하여 다른 글자를 입력하면 내용이 삭제되는 기능 구현
 	*/
-	$("#rb_bname").focus(function() {
+	$("#rb_bname,#rb_rtime,#rb_subject").focus(function() {
 		$(this).select()
 	})
 	$("#rb_bname").keypress( function(event) {
@@ -182,7 +182,7 @@ reset: form안에 있는 경우 form의 input box에 임의로 작성한 데이�
 		<form:form action="" modelAttribute="rBookVO">
 			<div class="input-box">
 			<form:input type="text" path="rb_bcode" placeholder="도서코드"/>
-			<input id="rb_bname" name="rb_bname" placeholder="도서이름을 입력한후 enter...">
+			<form:input path="rb_bname" placeholder="도서이름을 입력한후 enter..."/>
 			</div>
 			
 			<div class="input-box">

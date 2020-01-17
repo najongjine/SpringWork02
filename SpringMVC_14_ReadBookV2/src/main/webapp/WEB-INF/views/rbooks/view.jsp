@@ -24,6 +24,9 @@ $(function() {
 			url+="update/${RBOOK.rb_seq}"
 		}
 		else if(btn_id=="btn-delete"){
+			if(!confirm("독서록을 삭제할까요?")){
+				return false
+			}
 			url+="delete/${RBOOK.rb_seq}"
 		}
 		else if(btn_id=="btn-list"){
@@ -125,6 +128,10 @@ margin-right: 5px;
 		<button id="btn-delete" type="button" class="biz-red">삭제</button>
 		<button id="btn-list" type="button" class="biz-orange">리스트보기</button>
 	</article>
+</section>
+
+<section>
+<%@ include file="/WEB-INF/views/rbooks/list-body.jsp" %>
 </section>
 
 </body>

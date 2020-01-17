@@ -7,6 +7,7 @@ import java.util.Random;
 import org.springframework.stereotype.Service;
 
 import com.biz.rbooks.domain.BookVO;
+import com.biz.rbooks.domain.ReadBookVO;
 import com.biz.rbooks.repository.BookDao;
 
 import lombok.RequiredArgsConstructor;
@@ -51,4 +52,5 @@ public class BookService {
 		// TODO Auto-generated method stub
 		return bookDao.findByBCode(b_code);
 	}
+
 }

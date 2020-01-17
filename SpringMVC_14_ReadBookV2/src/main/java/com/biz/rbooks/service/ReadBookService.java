@@ -29,4 +29,19 @@ public class ReadBookService {
 		// TODO Auto-generated method stub
 		return rBookDao.findBySeq(rb_seq);
 	}
+
+	public int update(ReadBookVO rBookVO) {
+		int ret=rBookDao.update(rBookVO);
+		return 0;
+	}
+
+	public int delete(long rb_seq) {
+		// TODO Auto-generated method stub
+		return rBookDao.delete(rb_seq);
+	}
+
+	public List<ReadBookVO> findByBCode(String b_code) {
+		// TODO Auto-generated method stub
+		return rBookDao.findByBCode(b_code);
+	}
 }
