@@ -7,14 +7,14 @@
  문서를 작성할수 있다.
  
 ### drag n drop으로 파일올리기
-1Drag and drop 을 수행할 box 만들기
-2 jq의 dragover, drop event를 설정
-3 e.originalEvent.dataTransfer 로 부터 files 객체를 추출
-4 files 객체의 0번째 file 객체를 추출
+1. Drag and drop 을 수행할 box 만들기
+2. jq의 dragover, drop event를 설정
+3. e.originalEvent.dataTransfer 로 부터 files 객체를 추출
+4. files 객체의 0번째 file 객체를 추출
 
-5 ajax를 사용해서 서버로 파일을 업로드 수행하고
-6 파일 이름등을 response로 되돌려 받아서 form img_file input box에 저장을 하고
-7 내용을 form post로 업로드하면 나머지 정보를 db에 저장
+5. ajax를 사용해서 서버로 파일을 업로드 수행하고
+6. 파일 이름등을 response로 되돌려 받아서 form img_file input box에 저장을 하고
+7. 내용을 form post로 업로드하면 나머지 정보를 db에 저장
 
 ### Drag n drop으로 여러개 파일 올리기
 * 1~3까지는 single file upload와 동일

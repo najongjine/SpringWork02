@@ -1,0 +1,5 @@
+1. home.jsp 에서 173 번줄 script 발동
+ 파일 추출하고
+ 186 번줄 은 js 폴더의 images_upload.js 발동
+
+2. images_upload.js 에서 ajax로 컨트롤러에 파일 보냄
