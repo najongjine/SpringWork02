@@ -3,3 +3,15 @@
  186 번줄 은 js 폴더의 images_upload.js 발동
 
 2. images_upload.js 에서 ajax로 컨트롤러에 파일 보냄
+
+3. controller에선 MultipartHttpServletRequest 매게변수로 파일들을 받음
+
+4. ImageService files up 에서 파일 정보는 VO에 입력하고, fileService를 이용해서 서버에 직접 업로드.  
+
+ fileService에선 UUID붙인 이름 리턴하고, imageservice에선 VO정보 입력된 리스트 리턴.
+
+5. 업로드된 이미지를 다시 insert form 안에다 뿌리고, form에서 저장버튼 누를시, 
+
+imageVO(마스터) + imageFilesVO(sub) 테이블 정보가 모두 컨트롤러에 올라가도록 함.
+
+6. VO에 담긴 정보들을 실제 DB에 저장.

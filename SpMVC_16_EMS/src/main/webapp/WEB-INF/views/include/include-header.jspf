@@ -17,13 +17,12 @@ $(function() {
 	$(".main-menu li").click(function() {
 		if($(this).text()=="EMS"){
 			let text=$(this).data("menu-name")
-			alert(text)
 		}
 		//let href=$(this).attr("data-menu")
 		
 		//data-menu 속성에 지정된 값을 가져와라
 		let href=$(this).data("menu")
-		document.location.href="${rootPath}/"+href
+		document.location.href="${rootPath}/ems/"+href
 	})
 })
 </script>

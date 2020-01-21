@@ -21,11 +21,10 @@ public class SendMailService {
 	private final JavaMailSender xMail;
 	
 	public void sendMail(EmailVO emailVO) {
-		log.debug("!!! vo in service:"+emailVO.toString());
-		String from_email=emailVO.getFrom_email();
+		String from_email=emailVO.getFromEmail();
 		String to_email=emailVO.getTo_email();
 		
-		String from_name=emailVO.getFrom_name();
+		String from_name=emailVO.getFromName();
 		String to_name=emailVO.getTo_name();
 		
 		//mail을 보내기 위한 smtp 객체

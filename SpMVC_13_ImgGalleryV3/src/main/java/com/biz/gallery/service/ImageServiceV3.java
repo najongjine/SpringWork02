@@ -24,6 +24,7 @@ public class ImageServiceV3 extends ImageServiceV2{
 
 	@Override
 	public int insert(ImageVO imageVO) {
+		//UUID 붙이기전 이름 설정
 		imageVO=updateImageFiles(imageVO);
 		int ret=imDao.insert(imageVO);
 		long img_pcode=imageVO.getImg_seq();
@@ -45,6 +46,7 @@ public class ImageServiceV3 extends ImageServiceV2{
 	protected ImageVO updateImageFiles(ImageVO imageVO) {
 		List<ImageFilesVO> imgFiles=imageVO.getImg_up_files();
 		if(imgFiles!=null && imgFiles.size()>0) {
+			//대표이미지
 			imageVO.setImg_file(imgFiles.get(0).getImg_file_upload_name());
 			for(ImageFilesVO ifVO:imgFiles) {
 				ifVO.setImg_file_origin_name(ifVO.getImg_file_upload_name().substring(36));
