@@ -18,7 +18,7 @@
 </bean>
 <!-- mail을 보내기 위한 기본 설정수행 -->
 <bean class="org.springframework.mail.javamail.JavaMailSenderImpl">
-<property name="host" value="smtp.naver.com"></property>
+<property name="host" value="smtp.gmail.com"></property>
 <property name="port" value="465"></property>
 <property name="username" value="gmail주소다씀@gmail.com"></property>
 <property name="password" value="${naver.password}"></property>

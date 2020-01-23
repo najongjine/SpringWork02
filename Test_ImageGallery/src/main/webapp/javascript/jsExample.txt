@@ -1,0 +1,20 @@
+function funca(text){
+	alert("aaa"+text)
+}
+
+/*
+ * 함수를 변수선언 처럼 만드는 방법
+ */
+var funcb=function(text){
+	alert("bbb"+text)
+}
+/*
+ * 화살표 함수
+ */
+var funcc=()->{
+	laert("ccc")
+}
+function funcTest(){
+	funca("111")
+	funcb("222")
+}

@@ -18,11 +18,6 @@ property에 locations를 설정하고 내부에 list를 설정한후
 value값으로 해당 파일들을 나열해주면 된다. -->
 <bean class="org.jasypt.spring31.properties.EncryptablePropertyPlaceholderConfigurer">
 	<constructor-arg ref="configEnC"></constructor-arg>
-	<property name="locations">
-		<list>
-		 <value>/WEB-INF/spring/naver.email.secret.properties</value>
-		 <value>/WEB-INF/spring/hibernate.secret.properties</value>
-		</list>
-	</property>
+	<property name="location" value="/WEB-INF/spring/props/naver.email.secret.properties"/>
 </bean>
 </beans>

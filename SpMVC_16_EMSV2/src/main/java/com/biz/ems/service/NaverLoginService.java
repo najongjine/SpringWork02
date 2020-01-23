@@ -16,8 +16,8 @@ import lombok.extern.slf4j.Slf4j;
 public class NaverLoginService {
 	private final String clientId="stJPgYIQiWvPsvbVNm5w";
 	private final String loginAPI_URL="https://nid.naver.com/oauth2.0/authorize";
-	private final String callbackLocalURL="http://localhost:8080/ems/naver/ok";
-	private final String callbackURL="https://callor.com:12600/ems/naver/ok";
+	private final String callbackLocalURL="http://localhost:8080/ems_najongjine/member/naver/ok";
+	private final String callbackURL="https://callor.com:12600/ems_najongjine/member/naver/ok";
 	
 	public String oAuthLoginGet() {
 		String redirectURI=null;
@@ -36,6 +36,7 @@ public class NaverLoginService {
 		
 		String apiURL=loginAPI_URL;
 		apiURL+="?client_id="+clientId;
+		apiURL+="&response_type=code";
 		apiURL+="&redirect_uri="+redirectURI;
 		apiURL+="&state="+stateKey;
 		
