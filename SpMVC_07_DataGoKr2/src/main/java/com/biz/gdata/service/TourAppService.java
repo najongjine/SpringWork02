@@ -74,7 +74,7 @@ public class TourAppService {
 		} else {
 			resString=tgService.getDataString(getAreaQuery(cityCode));
 		}
-
+		
 		// JSONParser jParser=new JSONParser();
 		JsonElement jElement = JsonParser.parseString(resString);
 
