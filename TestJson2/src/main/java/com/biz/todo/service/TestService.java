@@ -40,9 +40,8 @@ public class TestService {
 		 * 내가 원하는 특정 데이터만 뽑기 위해 파싱을 String 형 json을 다시 
 		 * JSON으로 파싱 할거임.
 		 */
-		JsonParser jsonParser = new JsonParser();
 		//String json을 다시 공용데이터 JSON으로 변환
-		JsonElement jsonElement = jsonParser.parse(strJson);
+		JsonElement jsonElement = JsonParser.parseString(strJson);
 
 		//공용 JSON에서 특정 객체만 String json으로 추출.
 		String strBusList = jsonElement.getAsJsonObject().get("BUSSTOP_LIST").toString();

@@ -6,7 +6,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.biz.ems.domain.NaverLoginOk;
+import com.biz.ems.domain.NaverMember;
+import com.biz.ems.domain.NaverReturnAuth;
+import com.biz.ems.domain.NaverTokenVO;
 import com.biz.ems.service.NaverLoginService;
 
 import lombok.RequiredArgsConstructor;
@@ -25,9 +27,18 @@ public class MemberController {
 		return "redirect:"+apiURL;
 	}
 	
+	/*'
+	 * 네이버에 로그인 요청을 보낼때
+	 * 네이버가 return할 url부분
+	 * 외부에서 접속할수 있는 url 이어야 한다.
+	 * 
+	 * 네이버에 로그인이 성공하면 실제로 네이버에서 로그인 인증정보를 보내준다.
+	 */
 	@ResponseBody
 	@RequestMapping(value = "/naver/ok",method=RequestMethod.GET)
-	public NaverLoginOk naver_ok(@ModelAttribute NaverLoginOk naverOk) {
-		return naverOk;
+	public NaverMember naver_ok(@ModelAttribute NaverReturnAuth naverOk) {
+		NaverTokenVO nToken=nLoginService.oAuthAccessGetToken(naverOk);
+		NaverMember memberVO=nLoginService.getNaverMemberInfo(nToken);
+		return memberVO;
 	}
 }

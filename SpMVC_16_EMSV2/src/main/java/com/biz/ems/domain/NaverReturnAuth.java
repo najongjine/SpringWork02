@@ -13,10 +13,9 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @Builder
-public class NaverLoginOk {
+public class NaverReturnAuth {
 	private String code;
 	private String state;
-	private String email;
-	private String nickname;
-	private String name;
+	private String error;
+	private String error_description;
 }
