@@ -14,6 +14,12 @@
 
 <script type="text/javascript">
 $(function() {
+	//${LOGIN==NO}
+	if("NO"=="${LOGIN}"){
+		alert("로그인을 수행해야 합니다")
+		$("div.login-modal").css("display","block")
+		return;
+	}
 	$(".main-menu li").click(function() {
 		if($(this).text()=="로그인"){
 			$("div.login-modal").css("display","block")
@@ -26,7 +32,7 @@ $(function() {
 		
 		//data-menu 속성에 지정된 값을 가져와라
 		let href=$(this).data("menu")
-		document.location.href="${rootPath}/ems/"+href
+		document.location.href="${rootPath}/"+href
 	})
 })
 </script>
@@ -36,9 +42,9 @@ $(function() {
 </header>	
 <nav>
 	<ul class="main-menu">
-		<li data-menu="list" data-menu-name="홈으로">EMS</li>
-		<li data-menu="bbs/free">자유게시판</li>
-		<li data-menu="bbs/notice">공지사항</li>
+		<li data-menu="ems/list" data-menu-name="홈으로">EMS</li>
+		<li data-menu="ems/bbs/free">자유게시판</li>
+		<li data-menu="ems/bbs/notice">공지사항</li>
 		<c:if test="${empty MEMBER }">
 		<li data-menu="member/login">로그인</li>
 		<li data-menu="member/join">회원가입</li>

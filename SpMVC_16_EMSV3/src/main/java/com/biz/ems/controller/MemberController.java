@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.biz.ems.domain.NaverMember;
 import com.biz.ems.domain.NaverReturnAuth;
@@ -42,5 +43,17 @@ public class MemberController {
 		NaverMember memberVO=nLoginService.getNaverMemberInfo(nToken);
 		httpSession.setAttribute("MEMBER", memberVO);
 		return "redirect:/ems/list";
+	}
+	
+	@RequestMapping(value = "/logout",method=RequestMethod.GET)
+	public String logout(HttpSession httpSession) {
+		httpSession.removeAttribute("MEMBER");
+		return "redirect:/ems/list";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/authenic")
+	public String authenic(String dummy) {
+		return "authenic works: "+dummy;
 	}
 }
