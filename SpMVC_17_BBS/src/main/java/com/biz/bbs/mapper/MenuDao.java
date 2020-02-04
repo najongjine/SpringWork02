@@ -24,7 +24,15 @@ public interface MenuDao {
 	public List<MenuVO> getAllMenu();
 	
 	@Select("select * from tbl_menu where menu_p_id=#{menu_id}")
+	@Results(value= {
+			@Result(property = "menu_id",column = "menu_id"),
+			@Result(property = "drop_menus2",column = "menu_id",
+			javaType=List.class,
+			many=@Many(select = "getTest")
+			)
+	})
 	public List<MenuVO> getSubMenu(String menu_id);
 	
+	@Select("select * from tbl_menu where menu_id=#{menu_id}")
 	public List<MenuVO> getTest(String menu_id);
 }

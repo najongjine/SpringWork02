@@ -3,7 +3,10 @@ package com.biz.todo.service;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.List;
@@ -52,6 +55,26 @@ public class TestService {
 		log.debug("!!! busList[0]: "+busList.toString());
 	}
 	
+	public void realEstTestJson() {
+		String strJson="";
+		try {
+			//여기서 바로 json형태로된 string 문자열 받음
+			strJson=realEstate();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			log.debug("!!! error occured");
+		}
+		
+		/*
+		 * json 안에는 내가 원하지 않는 쓸모없는 객체들이 많기 때문에 
+		 * 내가 원하는 특정 데이터만 뽑기 위해 파싱을 String 형 json을 다시 
+		 * JSON으로 파싱 할거임.
+		 */
+		//String json을 다시 공용데이터 JSON으로 변환
+		JsonElement jsonElement = JsonParser.parseString(strJson);
+
+	}
+	
 	public String busTest() throws IOException {
 		/*
 		 * 여기선 데이터를 바로 String형 json으로 받음
@@ -85,4 +108,34 @@ public class TestService {
         //String형 json을 리턴
         return returnData;
 	}
+	
+	public String realEstate() throws IOException {
+		StringBuilder urlBuilder = new StringBuilder("http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcNrgTrade"); /*URL*/
+        urlBuilder.append("?" + URLEncoder.encode("ServiceKey","UTF-8") + "=i7aroZN%2BLlgjJucKmTqVpL8Kd%2Fi05AThPQDDLk5MLtoNU0HjelO4288BGCOhZRMOlbWpN34p8Wbyn0Ijz0WbWQ%3D%3D"); /*Service Key*/
+        urlBuilder.append("&" + URLEncoder.encode("LAWD_CD","UTF-8") + "=" + URLEncoder.encode("11110", "UTF-8")); /*각 지역별 행정표준코드관리시스템(www.code.go.kr)의 법정동코드 10자리 중 앞 5자리*/
+        urlBuilder.append("&" + URLEncoder.encode("DEAL_YMD","UTF-8") + "=" + URLEncoder.encode("201512", "UTF-8")); /*실거래 자료의 계약년월(6자리)*/
+        urlBuilder.append("&" + URLEncoder.encode("serviceKey","UTF-8") + "=" + URLEncoder.encode("인증키(URL Encode)", "UTF-8")); /*공공데이터포털에서 발급받은 인증키*/
+        URL url = new URL(urlBuilder.toString());
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("GET");
+        conn.setRequestProperty("Content-type", "application/json");
+        System.out.println("Response code: " + conn.getResponseCode());
+        BufferedReader rd;
+        if(conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
+            rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        } else {
+            rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
+        }
+        StringBuilder sb = new StringBuilder();
+        String line;
+        while ((line = rd.readLine()) != null) {
+            sb.append(line);
+        }
+        rd.close();
+        conn.disconnect();
+        System.out.println("!!! real estate: "+sb.toString());
+        String str=String.valueOf(sb);
+        return str;
+    }
+	
 }

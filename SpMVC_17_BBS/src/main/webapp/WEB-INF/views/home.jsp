@@ -29,7 +29,7 @@
 <script type="text/javascript">
 $(function() {
 	$("#btn-write").click(function() {
-		document.location.href="${rootPath}/bbs/write"
+		document.location.href="${rootPath}/bbs/input"
 	})
 })
 </script>
@@ -38,16 +38,30 @@ $(function() {
 	<h3>Build Board System</h3>
 </header>
 <ul class="nav">
-	<li class="nav-item"><a href="nav-link" href="/">Home</a></li>
-	<li class="nav-item justify-content-end"><a href="nav-link" href="/member/login">Log in</a></li>
-	<li class="nav-item"><a href="nav-link" href="/member/join">Register</a></li>
+	<li class="nav-item"><a href="${rootPath }/">Home</a></li>
+	<li class="nav-item justify-content-end"><a href="${rootPath}/member/login">Log in</a></li>
+	<li class="nav-item"><a href="${rootPath}/member/join">Register</a></li>
 </ul>
 
 <body class="container-fluid">
-	<div class="input-group">
+<section>
+<c:choose>
+	<c:when test="${BODY=='BBS_INPUT' }">
+		<%@ include file="/WEB-INF/views/include/bbs_input.jsp" %>
+	</c:when>
+	<c:when test="${BODY=='VIEW' }">
+		<%@ include file="/WEB-INF/views/include/view.jsp" %>
+	</c:when>
+	<c:otherwise>
+		<%@ include file="/WEB-INF/views/include/bbs_list.jsp" %>
+		<div class="input-group">
 		<div class="input-group-btn">
-			<button id="btn-write" class="btn btn-default" type="button">게시판 작성</button>
+			<button id="btn-write" class="btn btn-primary" type="button">게시판 작성</button>
 		</div>
 	</div>
+	</c:otherwise>
+</c:choose>
+</section>
+	
 </body>
 </html>

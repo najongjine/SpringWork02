@@ -24,10 +24,7 @@ public class HomeController {
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model) {
-		List<MenuVO> menuList=mDao.getAllMenu();
-		log.debug("!!! menu_drops: "+menuList.toString()+"\n");
-		model.addAttribute("MENUS", menuList);
-		return "home";
+		return "redirect:/bbs/list";
 	}
 	
 }

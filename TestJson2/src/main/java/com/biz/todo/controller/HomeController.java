@@ -29,7 +29,8 @@ public class HomeController {
 	private final TestService testService;
 	
 	//,produces = "text/json;charset=UTF-8"
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@ResponseBody
+	@RequestMapping(value = "/", method = RequestMethod.GET,produces = "text/json;charset=UTF-8")
 	public String home(Locale locale, Model model) {
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
@@ -38,13 +39,13 @@ public class HomeController {
 		
 		String data="";
 		try {
-			data=testService.busTest();
+			data=testService.realEstate();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		testService.testJson(new Object());
-		return "home";
+		//testService.realEstTestJson();
+		return data;
 	}
 	
 }
