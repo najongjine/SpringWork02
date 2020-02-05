@@ -14,9 +14,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import com.biz.bbs.domain.BBsVO;
+import com.biz.bbs.domain.CommentVO;
 import com.biz.bbs.service.BBsService;
+import com.biz.bbs.service.CommentService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -26,11 +29,13 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping(value = "/bbs")
 public class BBsController {
 	private final BBsService bService;
+	private final CommentService cmmService;
 
 	@Autowired
-	public BBsController(@Qualifier("bServiceV1") BBsService bService) {
+	public BBsController(@Qualifier("bServiceV1") BBsService bService, CommentService cmmService) {
 		super();
 		this.bService = bService;
+		this.cmmService=cmmService;
 	}
 	
 	@ModelAttribute("bbsVO")
@@ -59,24 +64,59 @@ public class BBsController {
 	}
 	
 	@RequestMapping(value = "/save",method=RequestMethod.POST)
-	public String save(@ModelAttribute BBsVO bbsVO) {
+	public String save(@ModelAttribute BBsVO bbsVO,SessionStatus sessionStatus) {
 		bService.save(bbsVO);
+		sessionStatus.setComplete();
 		return "redirect:/bbs/list";
 	}
 	
+	/*
+	 * view method에서 model attribute을 사용한 이유
+	 * 게시판 상세페이지(view)에서 답글을 작성할때 본문만 작성하는 textArea box를 두고
+	 * 나머지 항목들은 별도로 저장하거나 하지 않아도 답글을 저장했을때
+	 * 원글의 내용이 같이 controller로 전송되도록 하기위한 설정.
+	 * 
+	 * @modelAttribute로 설정된 bbsVO는 sessionAttribute에 설정이 되어 있기 때문에
+	 * 
+	 * model.addAtribute로 만드는 순간 서버 session 메모리에 데이터가 통째로 저장되어
+	 * 있어서 다른 method에서 그 값을 참조할수 있다.
+	 */
 	@RequestMapping(value = "/view",method=RequestMethod.GET)
 	public String view(@ModelAttribute("bbsVO") BBsVO bbsVO,Model model) {
 		
 		bbsVO=bService.findById(bbsVO.getBbs_id());
+		
 		model.addAttribute("bbsVO", bbsVO);
 		model.addAttribute("BODY", "VIEW");
-		log.debug("!!! bbsVO: "+bbsVO);
 		return "home";
 	}
 	
 	@RequestMapping(value = "/reply",method=RequestMethod.POST)
-	public String reply(@ModelAttribute("bbsVO") BBsVO bbsVO) {
+	public String reply(@ModelAttribute("bbsVO") BBsVO bbsVO,SessionStatus sessionStatus) {
+		LocalDateTime ldt=LocalDateTime.now();
+		DateTimeFormatter ld=DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		DateTimeFormatter lt=DateTimeFormatter.ofPattern("HH:mm:ss");
+		bbsVO.setBbs_date(ldt.format(ld));
+		bbsVO.setBbs_time(ldt.format(lt));
 		bbsVO=bService.reply(bbsVO);
+		sessionStatus.setComplete();
 		return "redirect:/bbs/list";
+	}
+	
+	@RequestMapping(value = "/cmt_write",method=RequestMethod.POST)
+	public String comment(CommentVO cmmVO,Model model) {
+		log.debug("!!! cmmVO: "+cmmVO.toString());
+		int ret=cmmService.insert(cmmVO);
+		List<CommentVO> cmmList=cmmService.selectAll(cmmVO.getCmt_p_id());
+		model.addAttribute("CMT_LIST",cmmList);
+		return "include/bbs_comment";
+	}
+	
+	@RequestMapping(value = "/cmt_list",method=RequestMethod.POST)
+	public String cmm_list(Model model,String cmt_p_id) {
+		long p_id=Long.valueOf(cmt_p_id);
+		List<CommentVO> cmmList=cmmService.selectAll(p_id);
+		model.addAttribute("CMT_LIST", cmmList);
+		return "include/bbs_comment";
 	}
 }

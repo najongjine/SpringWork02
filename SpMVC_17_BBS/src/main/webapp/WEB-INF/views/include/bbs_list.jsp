@@ -4,9 +4,8 @@
 <c:set var="rootPath" value="${pageContext.request.contextPath }" />
 <script>
 $(function() {
-	$(".dataList").click(function() {
+	$(".bbs_tr").click(function() {
 		let bbs_id=$(this).attr("data-bbs_id")
-		alert("works")
 		document.location.href="${rootPath}/bbs/view?bbs_id="+bbs_id
 	})
 })
@@ -28,7 +27,7 @@ $(function() {
 			</c:when>
 			<c:otherwise>
 				<c:forEach var="BBS" items="${BBS_LIST}" varStatus="index">
-					<tr class="dataList" data-bbs_id="${BBS.bbs_id }">
+					<tr class="bbs_tr" data-bbs_id="${BBS.bbs_id }">
 						<td>${index.count}</td>
 						<td>${BBS.bbs_writer }</td>
 						<td>${BBS.bbs_date }</td>

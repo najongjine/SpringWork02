@@ -1,10 +1,8 @@
 package com.biz.ems.service;
 
-import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URLEncoder;
 import java.security.SecureRandom;
 
 import org.springframework.beans.factory.annotation.Value;

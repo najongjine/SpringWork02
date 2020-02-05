@@ -5,12 +5,11 @@
 
 <mapper namespace="com.biz.bbs.mapper.BBsDao">
 	<select id="selectMain" resultMap="bbsReply">
-		select * from tbl_bbs where bbs_p_id is null
+		select * from tbl_bbs where bbs_p_id is null or bbs_p_id=0
 	</select>
 	
 	<resultMap type="bbsVO" id="bbsReply">
 		<id column="bbs_id" property="bbs_id"/>
-		<result column="bbs_id" property="bbs_id"/>
 		<collection property="bbs_reply" column="bbs_id" ofType="bbsVO"
 		select="selectSub"/>
 	</resultMap>
