@@ -21,3 +21,9 @@
  3. 네이버가 보내는 login창에 로그인을 수행하고 정상으로 로그인이 되면
  4. OAuth20 규격의 token(버스표)을 보내주는데 아 토큰을 이용해서 네이버에 어떤 정보(회원정보)들을 요청할수 있다.
  
+ 
+ 서비스 url:
+ https://callor.com:12600/ems_najongjine
+ 
+ callback:
+ https://callor.com:12600/ems_najongjine/member/naver/ok

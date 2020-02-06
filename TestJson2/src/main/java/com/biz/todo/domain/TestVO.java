@@ -1,5 +1,6 @@
 package com.biz.todo.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -18,5 +19,10 @@ import lombok.ToString;
 public class TestVO {
 	String test1="1";
 	String test2="2";
-	List test;
+	List<String> testList=new ArrayList<String>();
+	{
+		testList.add("3");
+		testList.add("4");
+		testList.add("5");
+	}
 }

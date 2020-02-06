@@ -29,7 +29,6 @@ public class HomeController {
 	private final TestService testService;
 	
 	//,produces = "text/json;charset=UTF-8"
-	@ResponseBody
 	@RequestMapping(value = "/", method = RequestMethod.GET,produces = "text/json;charset=UTF-8")
 	public String home(Locale locale, Model model) {
 		Date date = new Date();
@@ -44,8 +43,10 @@ public class HomeController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//testService.realEstTestJson();
-		return data;
+		
+		TestVO testVO=new TestVO();
+		model.addAttribute("testVO",testVO );
+		return "home";
 	}
 	
 }

@@ -104,12 +104,6 @@ var memberVO_m_id="${memberVO.m_id}"
 			
 			<tr>
 				<td>
-				<a href="${rootPath}/alter/deleteReadBook?_rb_seq=${readBookVO.rb_seq}">
-				<button type="button">삭제</button>
-				</a>
-				</td>
-				
-				<td>
 					<button type="button" id="postDelete" data-rb_seq="${readBookVO.rb_seq }">삭제(post)</button>
 				</td>
 			</tr>

@@ -10,6 +10,12 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript">
 $(function() {
+	var vo="${testVO}"
+	var voSingleElement="${testVO}"
+	var list=${testVO.testList}
+	$.each(list, function( index, value ) {
+		//alert(value)
+	})
 })
 </script>
 </head>

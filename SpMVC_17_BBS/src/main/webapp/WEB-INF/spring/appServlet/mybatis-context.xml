@@ -36,5 +36,5 @@
 	<property name="dataSource" ref="ds"></property>
 </bean>
 
-<mybatis-spring:scan base-package="com.biz.bbs.mapper"/>
+<mybatis-spring:scan base-package="com.biz.crawl.mapper"/>
 </beans>
