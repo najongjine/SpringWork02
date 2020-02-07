@@ -21,8 +21,10 @@
 검색한 단어는 get으로 보냄
  -->
 <select name="searchOption">
-    <option value="bnameSearch">책이름으로 검색</option>
-    <option value="bcodeSearch">책코드로 검색</option>
+    <option value="nameSearch">이름으로 검색</option>
+    <option value="phoneSearch">전화번호로 검색</option>
+    <option value="addrSearch">주소로 검색</option>
+    <option value="relSearch">관계로 검색</option>
 </select>
 <input name="inputStr">
 <button>검색</button>

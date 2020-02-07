@@ -35,16 +35,29 @@ public class MovieCrawlService {
 		return nDao.selectAll();
 	}
 	
-	@Scheduled(fixedDelay = 10000)
+	/*
+	 * fixedRate:바로 이전 스케줄링이 시작된 이후에 다시 시작할수
+	 * fixedDelay:바로 이전 스케줄링이 종료된 이후 
+	 * 
+	 * cron: Unix 시스템에서는 일정한 시간(년 월 일 시 분 초)를 지정해서
+	 * 어떤 일을 정기적으로 수행할때 cron tab이라는 기능을 이용해서 작업을 지정할수 있다.
+	 * 초,분,시,일,월,요일,년
+	 * 매일 1:30:00 에 요 method를 실행하라.
+	 */
+	//@Scheduled(cron = "0 30 1 * * *")
+	@Scheduled(fixedDelay = 100000)
 	public void naverMovieGet() {
 		List<NaverMovieVO> naverList=movieRankGet();
 		nDao.deleteAll();
-		for(NaverMovieVO vo:naverList) {
-			nDao.insert(vo);
-		}
+		nDao.insertAll(naverList);
 	}
 
 	public List<NaverMovieVO> movieRankGet() {
+		/*
+		 * 방식은 gson이랑 비슷함.
+		 * html 코드들을 다 가져오고 JSON으로 변환.
+		 * JSON 객체에서 내장 메소드를 사용하여 java primitive 로 변환  
+		 */
 		// URL에 해당하는 html 페이지 코드를 가져오기
 		// Document 라는 클래스에 담기
 		// jsoup Document 클래스를 사용하여

@@ -12,6 +12,7 @@ public interface NaverDao {
 	public List<NaverMovieVO> selectAll();
 	
 	public int insert(NaverMovieVO nVO);
+	public int insertAll(List<NaverMovieVO> list);
 	
 	@Delete("delete from tbl_movie")
 	public void deleteAll();
