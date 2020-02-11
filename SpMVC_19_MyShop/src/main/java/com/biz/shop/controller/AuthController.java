@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
+@RequestMapping(value = "/auth")
 public class AuthController {
 	
 	@RequestMapping(value = "/login",method=RequestMethod.GET)

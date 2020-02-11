@@ -25,7 +25,7 @@ $(function() {
 			<li class="nav-item"><a class="nav-link" href="${rootPath}/"> Home</a></li>
 			
 			<sec:authorize access="isAnonymous()">
-			<li class="nav-item"><a class="nav-link" href="${rootPath}/login">Login</a></li>
+			<li class="nav-item"><a class="nav-link" href="${rootPath}/auth/login">Login</a></li>
 			</sec:authorize>
 			
 			<sec:authorize access="isAuthenticated()">

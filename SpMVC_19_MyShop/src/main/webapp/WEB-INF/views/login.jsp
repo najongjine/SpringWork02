@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
 <c:set var="rootPath" value="${pageContext.request.contextPath}"></c:set>
 <style>
 *{
@@ -122,7 +124,7 @@ $(function() {
 	})
 })
 </script>
-	<form method="POST" action="${rootPath }/login" class="login-form">
+	<form:form method="POST" action="${rootPath }/login" class="login-form">
 		<h2>login</h2>
 		<c:if test="${param.error != null}">
 			<h3>아이디나 비번이 잘못 되었습니다</h3>
@@ -133,10 +135,11 @@ $(function() {
 		<c:if test="${LOGIN_MSG == 'NO_AUTH' }">
 			<h3>작성자만 볼수있음!!!</h3>
 		</c:if>
-		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-		<input type="text" name="id" id="id" placeholder="사용자 ID"> <input
+		
+		<!-- spring form tag를 사용하면 ${_csrf.parameterName} & ${_csrf.token} 생략 가능 -->
+		<input type="text" name="username" id="username" placeholder="사용자 ID"> <input
 			type="password" name="password" id="password" placeholder="비밀번호">
 		<button type="submit" id="btn-login">login</button>
 		
 		<button type="button" id="btn-join">회원가입</button>
-	</form>
+	</form:form>
