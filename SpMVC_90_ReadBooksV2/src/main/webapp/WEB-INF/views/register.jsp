@@ -9,6 +9,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>□□□ My JSP Page □□□</title>
+<script type="text/javascript">
+$(function() {
+	
+})
+</script>
 </head>
 <body>
 <header>
@@ -18,12 +23,14 @@
 <table>
 	<tr>
 		<td>아이디:</td>
-		<td><input name="m_id"></td>
+		<td><form:input path="m_id"/></td>
+		<form:errors path="m_id" cssClass="error"/>
 	</tr>
 	
 	<tr>
 		<td>비밀번호:</td>
-		<td><input type="password" name="m_password"></td>
+		<td><form:input path="password" name="m_password"/></td>
+		<form:errors path="m_password" cssClass="error"/>
 	</tr>
 	<tr>
 		<td>비밀번호 재입력:</td>
