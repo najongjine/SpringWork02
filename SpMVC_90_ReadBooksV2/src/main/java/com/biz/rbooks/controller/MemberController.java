@@ -1,10 +1,13 @@
 package com.biz.rbooks.controller;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,7 +16,6 @@ import com.biz.rbooks.domain.MemberVO;
 import com.biz.rbooks.repository.MemberDao;
 import com.biz.rbooks.service.MemberService;
 
-import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -36,7 +38,8 @@ public class MemberController {
 	 * 매게변수로 왜 memberVO를 붙인진 모르겠으나 작동은 잘 된다.
 	 */
 	@RequestMapping(value = "/login",method=RequestMethod.GET)
-	public String login(@ModelAttribute("memberVO") MemberVO memberVO) {
+	public String login(@ModelAttribute("memberVO") MemberVO memberVO, Model model) {
+		model.addAttribute("memberVO", new MemberVO());
 		return "login";
 	}
 	
@@ -50,7 +53,11 @@ public class MemberController {
 	 * 로그인 성공시 simpleviewlist 페이지로 이동한다.
 	 */
 	@RequestMapping(value = "/login",method=RequestMethod.POST)
-	public String login(@ModelAttribute("memberVO") MemberVO memberVO, HttpSession httpSession, Model model) {
+	public String login(@Valid @ModelAttribute("memberVO") MemberVO memberVO,BindingResult result, HttpSession httpSession, Model model
+			) {
+		if(result.hasErrors()) {
+			return "login";
+		}
 		memberVO=memberService.loginCheck(memberVO);
 		if(memberVO!=null) {
 			httpSession.setAttribute("memberVO", memberVO);
@@ -67,7 +74,8 @@ public class MemberController {
 	 * 회원가입 폼을 보여주는 페이지
 	 */
 	@RequestMapping(value = "/register",method=RequestMethod.GET)
-	public String register() {
+	public String register(@ModelAttribute("memberVO") MemberVO memberVO,Model model) {
+		model.addAttribute("memberVO", new MemberVO());
 		return "/register";
 	}
 	
@@ -78,7 +86,13 @@ public class MemberController {
 	 * 회원가입이 끝나면 메인화면으로 이동
 	 */
 	@RequestMapping(value = "/register",method=RequestMethod.POST)
-	public String register(@ModelAttribute("memberVO") MemberVO memberVO, String re_password) {
+	public String register(@Valid @ModelAttribute("memberVO") MemberVO memberVO, BindingResult result, String re_password
+			) {
+		log.debug("!!! 1 b4 haserror");
+		if(result.hasErrors()) {
+			log.debug("!!! 2 b4 jsp");
+			return "register";
+		}
 		int ret=memberService.insert(memberVO,re_password);
 		if(ret<1) {
 			log.debug("!!!화원가입 안됨!!!");

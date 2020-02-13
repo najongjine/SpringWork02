@@ -3,7 +3,7 @@ package com.biz.rbooks.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,10 +19,10 @@ import lombok.ToString;
 @ToString
 @Builder
 public class MemberVO {
-	@NotNull
+	@NotBlank(message = "* 아이디를 입력해 주세요")
 	private String m_id;//	varchar2(20 byte)
 	
-	@NotNull
+	@NotBlank(message = "* 비번을 입력해 주세요")
 	private String m_password;//	nvarchar2(125 char)
 	
 	private String m_login_date;//	varchar2(10 byte)

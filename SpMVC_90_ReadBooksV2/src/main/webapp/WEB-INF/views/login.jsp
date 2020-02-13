@@ -18,21 +18,23 @@
 <table>
 	<tr>
 		<td>아이디:</td>
-		<td><form:input path="m_id"/></td>
-		<form:errors path="m_id" cssClass="error"/>
+		<td><form:input path="m_id"/>
+		<form:errors path="m_id" /></td>
+		
 	</tr>
 	
 	<tr>
 		<td>비밀번호:</td>
-		<td><form:input type="password" path="m_password"/></td>
-		<form:errors path="m_password" cssClass="error"/>
+		<td><form:input type="password" path="m_password"/>
+		<form:errors path="m_password" /></td>
+		
 	</tr>
 	
 	<tr>
 		<td><button>로그인</button></td>
 		<td>
 		<a href="${rootPath}/member/register">
-		<button>회원가입</button>
+		<button type="button">회원가입</button>
 		</a>
 		</td>
 	</tr>
