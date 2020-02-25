@@ -1,36 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<section class="container-fluid row">
-	<article class="col-7 bg-light pro-input">
-		<form>
-			<div class="container-fluid form-group row">
-				<select class="custom-select-sm col-6">
-					<option>공산품</option>
-					<option>농산물</option>
-					<option>수산물</option>
-				</select>
-				<select class="custom-select-sm col-6">
-					<option>대덕물산</option>
-					<option>삼성농산</option>
-					<option>목포수산</option>
-				</select>
-			</div>
-			<div class="form-group">
-				<input class="form-control" placeholder="상품코드">
-			</div>
-			<div class="form-group">
-				<input class="form-control" placeholder="상품이름">
-			</div>
-			<div class="container-fluid form-group row">
-				<input class="form-control col-6" placeholder="매입단가">
-				<input class="form-control col-6" placeholder="판매단가">
-			</div>
-			<div class="form-group">
-				<textarea rows="" cols="" placeholder="상세정보"></textarea>
-			</div>
-		</form>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+<article class="mt-5 row">
+	<article class="col-md-7 col-12 bg-light pro-input">
+		<c:choose>
+			<c:when test="${PRO_BODY == 'DETAIL' }">
+				<%@ include file="/WEB-INF/views/admin/product_detail.jsp" %>
+			</c:when>
+			<c:otherwise>
+				<%@ include file="/WEB-INF/views/admin/product_input.jsp" %>
+			</c:otherwise>
+		
+		</c:choose>
 	</article>
-	<article class="col-3 bg-light pro-list">
+	
+	<article class="col-md-4 col-12 bg-light list-body">
+		<%@ include file="/WEB-INF/views/admin/product_list.jsp" %>
 	</article>
-</section>
+
+</article>
+
+

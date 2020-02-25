@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.biz.shop.dao.CartDao">
+ 
+ 	<update id="cart_to_delivery" parameterType="List">
+ 	update tbl_cart set p_status='DELIV'
+ 	where seq in (
+ 	<foreach collection="list" item="seq" separator=",">
+ 	#{seq}
+ 	</foreach>
+ 	)
+ 	</update>
+
+ 	<delete id="cart_list_delete" parameterType="List">
+ 	delete from tbl_cart
+ 	where seq in (
+ 	<foreach collection="list" item="seq" separator=",">
+ 		#{seq}
+ 	</foreach>
+ 	)
+ 	</delete>
+
+ </mapper> 
