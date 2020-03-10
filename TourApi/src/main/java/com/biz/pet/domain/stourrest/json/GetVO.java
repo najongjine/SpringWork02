@@ -14,7 +14,6 @@ import lombok.ToString;
 @ToString
 @Builder
 public class GetVO {
-	
-	public Response response;
+	private Response response;
 
 }

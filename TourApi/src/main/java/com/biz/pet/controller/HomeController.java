@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.biz.pet.domain.RealEstateVO;
 import com.biz.pet.domain.STourVO;
+import com.biz.pet.domain.fwfsh.WaterFishingVO;
+import com.biz.pet.domain.stourrest.json.STourVOJSON;
 import com.biz.pet.service.RealEstService;
 import com.biz.pet.service.TourService;
 
@@ -29,10 +31,10 @@ public class HomeController {
 	//,produces = "text/json;charset=UTF-8"
 	@ResponseBody
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public List<STourVO> home(Locale locale, Model model) throws URISyntaxException {
+	public List<WaterFishingVO> home(Locale locale, Model model) throws URISyntaxException {
 		
 		
-		return tourService.getServiceTourJSON();
+		return tourService.getWaterFishingLoc();
 	}
 	
 }

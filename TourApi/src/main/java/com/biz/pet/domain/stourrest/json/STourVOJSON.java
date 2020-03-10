@@ -1,5 +1,7 @@
 package com.biz.pet.domain.stourrest.json;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -15,8 +17,12 @@ import lombok.ToString;
 @Builder
 public class STourVOJSON {
 	//<code>1</code><name>강남구</name><rnum>1</rnum>
-	public String START_OBJECT;
+	@JsonProperty("code")
 	public String code;
+	
+	@JsonProperty("name")
 	public String name;
+	
+	@JsonProperty("rnum")
 	public String rnum;
 }

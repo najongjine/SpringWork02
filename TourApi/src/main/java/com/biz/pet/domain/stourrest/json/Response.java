@@ -14,5 +14,5 @@ import lombok.ToString;
 @ToString
 @Builder
 public class Response {
-	public RestBody body;
+	private RestBody body;
 }

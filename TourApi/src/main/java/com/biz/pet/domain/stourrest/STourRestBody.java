@@ -1,5 +1,8 @@
 package com.biz.pet.domain.stourrest;
 
+import lombok.ToString;
+
+@ToString
 public class STourRestBody {
-	public STourRestItems items;
+	public STourRestIWaterFshtems items;
 }

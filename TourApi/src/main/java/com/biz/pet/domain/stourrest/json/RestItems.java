@@ -17,5 +17,5 @@ import lombok.ToString;
 @Builder
 public class RestItems {
 	//public RestItem item;
-	public List<RestCode> item;
+	private List<STourVOJSON> item;
 }

@@ -14,5 +14,5 @@ import lombok.ToString;
 @ToString
 @Builder
 public class RestBody {
-	public RestItems items;
+	private RestItems items;
 }
